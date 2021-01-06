@@ -4,10 +4,11 @@ import axios from 'axios';
 class User extends Component {
 
     state = {
-        visible : false,
+        visible : true,
+
         kisiler: [{
         id: "",
-        name :"BAYBARS",
+        name :"NO CONNECTION",
         pass :"",
        
         }
@@ -20,16 +21,26 @@ class User extends Component {
     
       this.setState({
       isvisible : ! this.state.isvisible,
-      digerstate :"kötü"
+     // digerstate :"kötü"
        });
-   
+    
    }
 
-   dene =  async (e)=> {
-    const deger = (e.target.value);
-    console.log(`Server localhost: üze')
-    const baba = await axios.get("localhost:5006/kisiler/:${deger}");
+  butonkapa = (e) =>{document.getElementByclassName("btn btn-primary").style.display="none";}
+
+  dene = async  (e)=> {
+   
+  // const deger = (e.target.value);
+  // const baba = await axios.get('http://localhost:5006/kisiler/' + deger);
+
+   const baba = await axios.get('http://localhost:5006/kisiler/' + e.target.value);
+   // console.log(deger);
+    console.log(baba.data);
+    console.log(baba.data[0].name);
+    console.log(baba.data[0].pass);
     
+
+
    }
 
   
@@ -42,15 +53,17 @@ class User extends Component {
        kisiler : adamlar.data
         
      });
+
+    
     }
 
 
     render() {
         const kisiler = this.state.kisiler;
       //const{kisiler} = this.state.kisiler;
-        
+       const visible = this.state.visible;
         return (
-           
+         
             <div>
             <div className="container p-1 my-3 bg-dark text-white">
             <h1 className="text-center">LOGIN</h1>
@@ -61,12 +74,13 @@ class User extends Component {
              
             <label htmlFor="sel1">Select list:</label>
             <select className="form-control" id="sel1" onChange = {this.dene} >   
-            
-            {
+            <option></option>
+            {  
             kisiler.map( adam =>{
               
                 return( 
-                    <option key = {adam.id}> {adam.name}  </option>
+                    
+                    <option key = {adam.name}> {adam.name}  </option>
 
                     )
                 }
@@ -79,7 +93,9 @@ class User extends Component {
             <label htmlFor="pwd">Password:</label>
             <input type="password" className="form-control" id="pwd"></input>
             </div>
-            <button type="button" className="btn btn-primary">Log In</button>
+            <div className={visible ? "d-block" : "d-none"}>
+            <button type="button" className="btn btn-primary" >Log In</button>
+            </div>
             </div>
             </div>
             </div>
