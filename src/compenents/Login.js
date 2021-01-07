@@ -4,12 +4,12 @@ import axios from 'axios';
 class User extends Component {
 
     state = {
-        visible : true,
-
+        gorunum: true,
+        visible : false,
         kisiler: [{
         id: "",
         name :"NO CONNECTION",
-        pass :"",
+        pass :""
        
         }
         ]
@@ -20,29 +20,48 @@ class User extends Component {
    tikla = (e) => {
     
       this.setState({
-      isvisible : ! this.state.isvisible,
+      visible : ! this.state.visible,
      // digerstate :"kötü"
        });
     
    }
+gir =(e) => {
+        this.setState({
+        gorunum : ! this.state.gorunum,
+       // digerstate :"kötü"
+         });
+       console.log(this.state.gorunum);  
+}
 
-  butonkapa = (e) =>{document.getElementByclassName("btn btn-primary").style.display="none";}
+   verideg = (e) => {
+       
+       //console.log(e.target.value);
+       //console.log(this.state.kisiler[0].pass);
+        if (e.target.value === this.state.kisiler[0].pass) {
+        this.tikla() } else  console.log("burada") 
+       // this.setState({
+        //  [e.target.pass] : e.target.value
+       // })
+     }   
+  //butonkapa = (e) =>{document.getElementByclassName("btn btn-primary").style.display="none";}
 
-  dene = async  (e)=> {
-   
+  dene = async  (e)=> {   
   // const deger = (e.target.value);
   // const baba = await axios.get('http://localhost:5006/kisiler/' + deger);
 
    const baba = await axios.get('http://localhost:5006/kisiler/' + e.target.value);
    // console.log(deger);
-    console.log(baba.data);
-    console.log(baba.data[0].name);
-    console.log(baba.data[0].pass);
-    
+   // console.log(baba.data);
+   // console.log(baba.data[0].name);
+   // console.log(baba.data[0].pass);
+   
+  this.setState({
+       kisiler : baba.data
+    //     //isvisible : ! this.state.isvisible,
+    //    // dige
 
-
-   }
-
+   });
+  }
   
    componentDidMount= async () =>{
   
@@ -62,9 +81,10 @@ class User extends Component {
         const kisiler = this.state.kisiler;
       //const{kisiler} = this.state.kisiler;
        const visible = this.state.visible;
+      const gorunum = this.state.gorunum;
         return (
          
-            <div>
+            <div className={gorunum ? "d-block" : "d-none"}>
             <div className="container p-1 my-3 bg-dark text-white">
             <h1 className="text-center">LOGIN</h1>
             </div>
@@ -91,10 +111,21 @@ class User extends Component {
             </div>
             <div className="form-group">
             <label htmlFor="pwd">Password:</label>
-            <input type="password" className="form-control" id="pwd"></input>
+            <input 
+             type="password" 
+             className="form-control" 
+             id="pwd"
+             onChange = {this.verideg}
+             
+             
+             >
+
+
+
+            </input>
             </div>
             <div className={visible ? "d-block" : "d-none"}>
-            <button type="button" className="btn btn-primary" >Log In</button>
+            <button type="button" className="btn btn-primary" onClick={this.gir}>Log In</button>
             </div>
             </div>
             </div>
