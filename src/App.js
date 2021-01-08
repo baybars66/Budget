@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-import Takvim from './compenents/Takvim';
+import Main from './compenents/Main';
+import Takvim from './compenents/Takvim.js';
 
 
 
@@ -12,15 +13,11 @@ class App extends Component {
   render() {
     return (
     <div className="container">
-  
-  <Takvim />
+    <Main />
   
     </div>
-
-
-    );
-      }
-
-     }
+   );
+  }
+}
 
 export default App;

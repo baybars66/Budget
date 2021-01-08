@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import Navbar from './compenents/Navbar';
-import Users from './compenents/Users';
+import Navbar from '../compenents/Navbar';
+import Users from '../compenents/Users';
 import './App.css';
 
 class App extends Component {

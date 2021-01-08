@@ -1,48 +1,54 @@
 import React, { useState} from 'react'
-import DatePicker from "react-datepicker";
- 
+import DatePicker, { registerLocale }  from "react-datepicker";
+
+
 import "react-datepicker/dist/react-datepicker.css";
 
-
-
+import '../CSS/Takvim.css';
 
 
 const Takvim=()=> {
-    
-        const [startDate, setStartDate] = useState(new Date());
-        //const startDate = this.state.startDate;
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(null);
+     const onChange = dates => {
+         const [start, end] = dates;
+         setStartDate(start);
+         setEndDate(end);
+     };
+     //const startDate = this.state.startDate;
      // const { startDate } = this.state;
      return( 
-        <div className="container p-0 my-3 bg-dark text-white">
-            <div className="container">
-            <div className="jumbotron">
-         <div className="row">
-         <div className="col">
-      
-      <DatePicker 
+
      
-      selected={startDate}
-      onChange={ date => setStartDate(date)}
-       inline
-      />
- 
-</div>
-
-<div className="col">
-
-      <DatePicker 
-      
-      placeholderText="End date"
-      selected={startDate}
-      onChange={ date => setStartDate(date)}
-       inline
+     
        
-      />
-      </div>
-      </div>
-</div>
-</div>
-</div>
+        <div className="row">
+        <div className="col-md-3 mb-4">
+
+        <h4 className="react-datepicker"> Departer & Return </h4>
+        <DatePicker 
+       
+         selected={startDate}
+         onChange={onChange}
+         startDate={startDate}
+         endDate={endDate}
+         locale = "en-gb"
+       
+         selectsRange
+         inline
+         dateFormat="dd/MM/yyyy"
+         />
+         </div>
+
+         <div className="col-md-3 mb-4">
+         
+
+         </div>
+         </div>
+        
+        
+         
+
 
     )
     }
