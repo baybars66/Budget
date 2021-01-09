@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 const Contextim = React.createContext();
 
@@ -19,6 +20,26 @@ const reducer = (state, action) => {
            
          }
 
+         case "ToMain" : 
+         // console.log('burada')
+           return{
+               ...state,
+               LoginKon: false,
+               MainKon: true
+        
+             
+           }
+  
+         
+           case "AktifKul" : 
+           // console.log('burada')
+             return{
+                 ...state,
+                AktifKul : action.payload
+          
+               
+             }
+    
        default: //console.log('değil')
            return state
  }
@@ -31,8 +52,8 @@ export class Arz extends Component {
     state = {
         kisiler : [
           {
-          id : 1,
-          name : "",
+          id : "1",
+          name : "bbbb",
           salary : "",
           dep : ""
    
@@ -41,6 +62,16 @@ export class Arz extends Component {
            
  
         ],
+
+        AktifKul : "",
+
+        LoginKon : true,
+
+        MainKon : false,
+
+
+
+
          dispatch : action => {
                 this.setState(state => reducer(state, action))
 
@@ -49,7 +80,21 @@ export class Arz extends Component {
 
 
      }
-    
+     componentDidMount = async () =>{
+         //  console.log('ilk mi');
+  // const {dispatch}=this.props;
+  const adamlar = await axios.get("http://localhost:5006/kisiler");
+   
+  // console.log(adamlar.data);
+  this.setState({
+     kisiler : adamlar.data
+    });
+  
+
+     }
+
+
+
     render() {
         return (
             <Contextim.Provider value = {this.state}>

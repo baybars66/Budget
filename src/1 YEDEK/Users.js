@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import User from './User';
-import Talep from './context';
+import User from '../compenents/User';
+import Talep from '../compenents/context';
 
  class Users extends Component {
     render() {

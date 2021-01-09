@@ -6,7 +6,7 @@ import Talep from './context';
 class User extends Component {
 
   state = {
-        isvisible : true,
+      //  isvisible : true,
         digerstate :"iyi"
         }
 

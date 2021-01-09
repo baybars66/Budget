@@ -1,10 +1,12 @@
 import React, { useState} from 'react'
 import DatePicker, { registerLocale }  from "react-datepicker";
-
-
+import tr from "date-fns/locale/tr"; // the locale you want
 import "react-datepicker/dist/react-datepicker.css";
 
 import '../CSS/Takvim.css';
+registerLocale("tr", tr); // register it with the name you want
+
+
 
 
 const Takvim=()=> {
@@ -32,7 +34,7 @@ const Takvim=()=> {
          onChange={onChange}
          startDate={startDate}
          endDate={endDate}
-         locale = "en-gb"
+         locale = "tr"
        
          selectsRange
          inline
