@@ -65,9 +65,9 @@ export class Arz extends Component {
 
         AktifKul : "",
 
-        LoginKon : true,
+        LoginKon : false,
 
-        MainKon : false,
+        MainKon : true,
 
 
 

@@ -24,10 +24,8 @@ const Takvim=()=> {
      
      
        
-        <div className="row">
-        <div className="col-md-3 mb-4">
-
-        <h4 className="react-datepicker"> Departer & Return </h4>
+        <div>
+       
         <DatePicker 
        
          selected={startDate}
@@ -37,15 +35,11 @@ const Takvim=()=> {
          locale = "tr"
        
          selectsRange
-         inline
+       
          dateFormat="dd/MM/yyyy"
+         inline
          />
-         </div>
-
-         <div className="col-md-3 mb-4">
          
-
-         </div>
          </div>
         
         

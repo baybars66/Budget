@@ -1,0 +1,21 @@
+
+
+.Main {
+    font-size: 0.9em;
+    left:800px;
+
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+  }
+
+
+.Main-img {
+    font-size: 0.9em;
+    left:800px;
+
+    margin-left: 5;
+    margin-right: auto;
+    
+  }
