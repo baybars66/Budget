@@ -1,12 +1,31 @@
 import React, { Component } from 'react'
-import Takvim from './Takvim';
+
 import Talep from './context';
 import Anahtar from './Anahtar';
+import axios from 'axios';
 
- class Main extends Component {
+
+ class Data extends Component {
 
     state = {
         durum : true,
+        country : [{
+            id:"",
+            name:""
+        }],
+
+        cat : [{
+            id:"",
+            name:""
+        }],
+
+        desc : [{
+            id:"",
+            name:""
+        }]
+        
+        
+
         
        }
 
@@ -19,40 +38,50 @@ import Anahtar from './Anahtar';
       //console.log(this.state.durum);
        }
 
+       componentDidMount = async () =>{
+        //  console.log('ilk mi');
+ // const {dispatch}=this.props;
+ const ulkeler = await axios.get("http://localhost:5006/Country");
+ const cats = await axios.get("http://localhost:5006/Cat"); 
+ const descs = await axios.get("http://localhost:5006/Desc"); 
+ // console.log(adamlar.data);
+ this.setState({
+    country : ulkeler.data,
+    cat : cats.data,
+    desc : descs.data
+
+   });
+
+ 
+
+    }
 
 
 
 
 
     render() {
-
+        const country = this.state.country;
         const durum = this.state.durum;
+        const cat = this.state.cat;
+        const desc = this.state.desc;
         return(
             <Talep>
                 {  // className="rounded float.right" alt="Cinque Terre"
                     value => {
-                        const {MainKon,AktifKul} = value;
+                        const {DataKon} = value;
                        // const {kisiler} =value;
                       // const isim = kisiler[0].name;//****************** */
                        //console.log(isim);
-                       const resimyolu = "/pictures/" + AktifKul + ".jpg";
+                      
                       
                        
         return (
 
-            <div className={MainKon ? "d-block" : "d-none"}>
+            <div className={DataKon ? "d-block" : "d-none"}>
 
 
-            <div className="container p-1 my-2 bg-dark text-white">
-            <h2 className="text-center">MAIN PAGE</h2>
-            
-            <div className="d-flex justify-content-between">
-            <h3 className="m-3">BAYBARS </h3>
-            <h5 className="m-4">You are the BEST in MARTAŞ </h5>
-            <img className="rounded m-2" src="./Baybars.jpg" alt="Generic placeholder image" width="100">
-              </img> 
-            </div>
-            </div>
+           
 
 
             <div className="container p-1 my-3 bg-dark text-white">
@@ -68,9 +97,18 @@ import Anahtar from './Anahtar';
             <div className= 'col-auto'>
             <label htmlFor="sel1">Select Country</label>
             <select className="custom-select mr-md-3" size="0" id="sel1" >   
-            <option>Balkan</option>
-            <option>Serbia</option>
-            <option>Bulgaria</option>
+            <option></option>
+            {  
+            country.map( adam =>{
+              
+                return( 
+                    
+                    <option key = {adam.name}> {adam.name}  </option>
+
+                    )
+                }
+                )
+            }
 
             </select>
             </div>
@@ -78,14 +116,42 @@ import Anahtar from './Anahtar';
             <div className= 'col-auto'>
             <label htmlFor="sel2">Descrip</label>
             <select className="custom-select mr-md-3"  id="sel2" >   
-            <option>Yemek</option>
+            <option></option>
+            {  
+            desc.map( desss =>{
+              
+                return( 
+                    
+                    <option key = {desss.name}> {desss.name}  </option>
+
+                    )
+                }
+                )
+            }
+
+
+
             </select>
             </div>
 
             <div className= 'col-auto'>
             <label htmlFor="sel3">Category</label>
             <select className="custom-select mr-md-3"  id="sel3" >   
-            <option>Food</option>
+            <option></option>
+
+            {  
+            cat.map( cats =>{
+              
+                return( 
+                    
+                    <option key = {cats.name}> {cats.name}  </option>
+
+                    )
+                }
+                )
+            }
+
+
             </select>
             </div>
 
@@ -141,7 +207,7 @@ import Anahtar from './Anahtar';
         )
     }
  }
-export default Main;
+export default Data;
 
 //<img className="rounded float-left" src={ resimyolu } alt={AktifKul}  ></img>
 

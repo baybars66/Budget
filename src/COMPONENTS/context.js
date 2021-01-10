@@ -26,6 +26,7 @@ const reducer = (state, action) => {
                ...state,
                LoginKon: false,
                MainKon: true
+               
         
              
            }
@@ -57,7 +58,7 @@ export class Arz extends Component {
           salary : "",
           dep : ""
    
-          },
+          }
    
            
  
@@ -65,9 +66,11 @@ export class Arz extends Component {
 
         AktifKul : "",
 
-        LoginKon : false,
+        LoginKon : true,
 
-        MainKon : true,
+        MainKon : false,
+
+        DataKon: true,
 
 
 
@@ -80,6 +83,7 @@ export class Arz extends Component {
 
 
      }
+
      componentDidMount = async () =>{
          //  console.log('ilk mi');
   // const {dispatch}=this.props;

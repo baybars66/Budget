@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
-import Main from './compenents/Main';
-import Login from './compenents/Login';
+import Main from './COMPONENTS/Main';
+import Login from './COMPONENTS/Login';
+import Data from './COMPONENTS/Data'
 
 
 
@@ -16,8 +17,9 @@ class App extends Component {
     <div className="container">
 
       
- <Login />
+<Login />
  <Main />
+ <Data />
     </div>
    );
   }
