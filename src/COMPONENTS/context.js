@@ -66,11 +66,11 @@ export class Arz extends Component {
 
         AktifKul : "",
 
-        LoginKon : false,
+        LoginKon : true,
 
         MainKon : false,
 
-        DataKon: true,
+        DataKon: false,
 
 
 

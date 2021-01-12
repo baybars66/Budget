@@ -25,7 +25,7 @@ import Talep from './context';
 
 
             <div className="container p-1 my-2 bg-dark text-white">
-            <h2 className="text-center">MAIN PAGE</h2>
+            <h2 className="text-center">MAIN___PAGE</h2>
             
             <div className="d-flex justify-content-between">
             <h3 className="m-3">{AktifKul} </h3>

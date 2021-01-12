@@ -1,8 +1,14 @@
+
+
+
+
+
+
 import React, { Component } from 'react'
 
-import Talep from '../COMPONENTS/context';
-import Anahtar from '../COMPONENTS/Anahtar';
-import Takvim from '../COMPONENTS/Takvim';
+import Talep from './context';
+import Anahtar from './Anahtar';
+import Takvim from './Takvim';
 import axios from 'axios';
 
 
@@ -70,7 +76,8 @@ import axios from 'axios';
             <Talep>
                 {  // className="rounded float.right" alt="Cinque Terre"
                     value => {
-                        const {DataKon} = value;
+                        const {DataKon,AktifKul} = value;
+                        const resimyolu = "/pictures/" + AktifKul + ".jpg";
                        // const {kisiler} =value;
                       // const isim = kisiler[0].name;//****************** */
                        //console.log(isim);
@@ -79,92 +86,125 @@ import axios from 'axios';
                        
         return (
 
-<div className={DataKon ? "d-block" : "d-none"}>
-<div className="container d-flex justify-content-end p-5 my-3 bg-dark text-white">
-
-<div className="row d-flex justify-content-end">
+            <div className={DataKon ? "d-block" : "d-none"}>
 
 
-    <div className= 'col'>
+           
+
+
+            <div className="container-fluid p-1 my-3 bg-dark text-white">
+             
+            <div className="d-flex justify-content-start">
+            <h5 className="">{AktifKul} </h5>
+            
+            <img className="rounded float-left" src={ resimyolu } alt={AktifKul}  ></img>
+         
+            <Takvim />  
+            </div>
+
+
+
+         
+            <form>
+          
+     
+       
+      
+            <div className="form-row">
         
+            <div className= 'col'>
+            <Anahtar />  
+            </div>
+
+            <div className= 'col'>
             <label htmlFor="sel3">Country</label>
-            <select className="form-control mr-md-3" size="0" id="sel3" >   
+            <select className="custom-select mr-md-3" size="0" id="sel3" >   
             <option></option>
             {  
             country.map( adam =>{
-              return( <option key = {adam.name}> {adam.name}  </option>)
-                })
+              
+                return( 
+                    
+                    <option key = {adam.name}> {adam.name}  </option>
+
+                    )
+                }
+                )
             }
+
             </select>
+            </div>
 
-
+            <div className= 'col'>
             <label htmlFor="sel5">Descrip</label>
-            <select className="form-control mr-md-3"  id="sel5" >   
+            <select className="custom-select mr-md-3"  id="sel5" >   
             <option></option>
             {  
             desc.map( desss =>{
-              return( <option key = {desss.name}> {desss.name}  </option>)
-                })
+              
+                return( 
+                    
+                    <option key = {desss.name}> {desss.name}  </option>
+
+                    )
+                }
+                )
             }
+
+
+
             </select>
+            </div>
 
-
+            <div className= 'col'>
             <label htmlFor="sel4">Category</label>
-            <select className="form-control mr-md-3"  id="sel4" >   
+            <select className="custom-select mr-md-3"  id="sel4" >   
             <option></option>
 
             {  
             cat.map( cats =>{
-              return( <option key = {cats.name}> {cats.name}  </option>)
-                })
+              
+                return( 
+                    
+                    <option key = {cats.name}> {cats.name}  </option>
+
+                    )
+                }
+                )
             }
+
+
             </select>
+            </div>
 
 
+            <div className= 'col'>
+          
             <label htmlFor="quan">Quantity</label>
             <input 
-             type="number" 
+             type="text" 
              className="form-control" 
              id="quan"
              onChange = {this.PassKon}></input>
-
-
+ </div>
+            <div className= 'col'>
             <label htmlFor="price">Price</label>
             <input 
-             type="number" 
+             type="text" 
              className="form-control" 
              id="price"
              onChange = {this.PassKon}></input>
-        </div>
-    
-   
-     <div className='col'>
-
-           <div className = 'row'>
-               <div className='col d-flex align-items-end flex-column'>  
-               <Anahtar />
-                </div>
-
-              <div className='col d-flex align-items-end flex-column'>
-              <Takvim />
-              </div>
             </div>
-           <div className = 'row'>
-               <div className='col d-flex align-items-end flex-column p-2'>  
-
-               <button type="buton" className="btn btn-primary" >Add</button>
-              </div>
-            </div>
-    </div>
-
-</div> 
-
-</div>
-</div>
+          
+      </div>
+           
         
+         </form>
+        
+         </div>
     
-  
-  
+         </div>  
+            
             
         )
     }
@@ -175,8 +215,6 @@ import axios from 'axios';
     }
  }
 export default Data;
-
-//disabled = {!ButonKon} onClick={this.ToMain.bind(this, dispatch)}
 
 //<img className="rounded float-left" src={ resimyolu } alt={AktifKul}  ></img>
 
@@ -194,7 +232,3 @@ export default Data;
 
 
 //<div className= 'col-md-8 mb-1 '>
-
-
-
-

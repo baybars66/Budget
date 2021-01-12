@@ -12,7 +12,7 @@ import '../CSS/Anahtar.css';
        }
 
 
-    work = (e)=>{
+    degis = (e)=>{
        this.setState({
         durum : ! this.state.durum
 
@@ -21,26 +21,37 @@ import '../CSS/Anahtar.css';
        }
 
 
-
-
     render() {
         const durum = this.state.durum;
         return (
-            <div>
-            <div className="">{ durum ? "Estimate" : "Real"}</div>
+         
+
+            <div className="">{ durum ? "Estimate" : "Realized"}
              
             <div className="mt-2">
-               <label  className="switch">
+               <label  className="switch">{durum}
              
-  <input id="sel2" type="checkbox" value = {durum} onClick={this.work}></input>
+  <input id="sel2" type="checkbox" value = {durum} onClick={this.degis}></input>
   <span className="slider round"></span>
   </label>
-  </div>
+ </div>
+</div>
 
-            </div>
+        
         )
     }
 }
 
 export default Anahtar;
 
+
+
+
+
+ 
+// <div className="checkbox">
+// <label>
+// <input type="checkbox" checked data-toggle="toggle" onChange= {this.degis} data-on="Estimate" data-off="Real" data-onstyle="danger" data-offstyle="success">
+// </input>
+// </label>
+// </div>

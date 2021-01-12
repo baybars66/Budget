@@ -3,7 +3,7 @@ import DatePicker, { registerLocale }  from "react-datepicker";
 import tr from "date-fns/locale/tr"; // the locale you want
 import "react-datepicker/dist/react-datepicker.css";
 
-import '../CSS/Takvim.css';
+//import '../CSS/Takvim.css';
 registerLocale("tr", tr); // register it with the name you want
 
 
