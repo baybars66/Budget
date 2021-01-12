@@ -95,8 +95,8 @@ import axios from 'axios';
             <Anahtar />
             </div>
             <div className= 'col-auto'>
-            <label htmlFor="sel1">Select Country</label>
-            <select className="custom-select mr-md-3" size="0" id="sel1" >   
+            <label htmlFor="sel3">Select Country</label>
+            <select className="custom-select mr-md-3" size="0" id="sel3" >   
             <option></option>
             {  
             country.map( adam =>{
@@ -114,8 +114,8 @@ import axios from 'axios';
             </div>
 
             <div className= 'col-auto'>
-            <label htmlFor="sel2">Descrip</label>
-            <select className="custom-select mr-md-3"  id="sel2" >   
+            <label htmlFor="sel5">Descrip</label>
+            <select className="custom-select mr-md-3"  id="sel5" >   
             <option></option>
             {  
             desc.map( desss =>{
@@ -135,8 +135,8 @@ import axios from 'axios';
             </div>
 
             <div className= 'col-auto'>
-            <label htmlFor="sel3">Category</label>
-            <select className="custom-select mr-md-3"  id="sel3" >   
+            <label htmlFor="sel4">Category</label>
+            <select className="custom-select mr-md-3"  id="sel4" >   
             <option></option>
 
             {  

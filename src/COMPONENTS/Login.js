@@ -9,7 +9,7 @@ class User extends Component {
         LoginKon: true,
         AktifKul: "Deneme",
         Pass:"",
-        visible : false,
+        ButonKon : false,
         kisiler: [{
           id: "",
           name :"NO CONNECTION",
@@ -21,6 +21,7 @@ class User extends Component {
   }
 
   ToMain = (dispatch, e) => {
+    e.preventDefault();
       const {LoginKon, AktifKul} = this.state;
       //console.log(AktifKul);
       dispatch({type:"AktifKul", payload:AktifKul});
@@ -29,18 +30,23 @@ class User extends Component {
 
   PassKon = (e) => {
        
+   
     //console.log(e.target.value);
     //console.log(this.state.kisiler[0].pass);
     if (e.target.value === this.state.Pass) {
-        this.Acıl() } else console.log("dede")
+        //console.log(this.state.ButonKon);
+        this.ButonGorun() } else {
+          return (null);
+         // console.log(this.state.ButonKon);
+        } 
     //this.setState({
     //e.target.pass] : e.target.value
     //})
   }   
 
-  Acıl = (e) => {
+  ButonGorun = (e) => {
     this.setState({
-    visible : ! this.state.visible,
+    ButonKon : ! this.state.ButonKon
     //digerstate :"kötü"
        });
   }
@@ -60,10 +66,24 @@ class User extends Component {
    //const {dispatch}=this.props;
    //dispatch({type:"AktifKul", payload:this.AktifKul});
   }
+
+  // SubKon = (e)=> { 
+  //  // e.preventDefault();
+  //   const Kon= this.state.ButonKon;
+  //   console.log("bu");
+  //   console.log(Kon);
+  //   Kon ? console.log(Kon)  : console.log(Kon)
+
+  // }
   
   componentDidMount = (e) =>{
-     // console.log('login açıldı');
+     console.log('login açıldı');
     }
+
+ componentDidUpdate = (e)=>{
+   
+  console.log('Update');
+ }
 
 
   render() {
@@ -78,23 +98,23 @@ class User extends Component {
                 //console.log(kisiler);
                 //iler = this.state.kisiler;
                 //const{kisiler} = this.state.kisiler;
-                const visible = this.state.visible;
+                const ButonKon = this.state.ButonKon;
                 //  const gorunum = this.state.gorunum;
            return (
          
-            <div className={LoginKon ? "d-block" : "d-none"}>
+            <div className= {LoginKon ? "d-block container-fluid"  : "d-none container-fluid"} >
 
-            <div className="container p-1 my-3 bg-dark text-white">
+            <div className="container-fluid p-1 my-3 bg-dark text-white">
             <h1 className="text-center">LOGIN</h1>
             </div>
 
-            <div className="container">
+            <div className="container-fluid">
             <div className="jumbotron">
-              <form>
+            <form>
             <div className="form-group">
             
             <label htmlFor="sel1">Select list:</label>
-            <select className="form-control" id="sel1" onChange = {this.Gir} >   
+            <select className="form-control" id="sel1" onChange = {this.Gir}  >   
             <option></option>
             {  
               kisiler.map( adam =>{
@@ -112,13 +132,15 @@ class User extends Component {
              type="password" 
              className="form-control" 
              id="pwd"
-             onChange = {this.PassKon} >
+            onChange = {this.PassKon}
+             >
                 </input>
 
             </div>
 
-            <div className={visible ? "d-block" : "d-none"}>
-            <button type="submit" className="btn btn-primary" onClick={this.ToMain.bind(this, dispatch)} >Log In</button>
+            <div className={ButonKon ? "d-block" : "d-none"}>
+
+            <button type="submit" className="btn btn-primary" disabled = {!ButonKon} onClick={this.ToMain.bind(this, dispatch)} >Log In</button>
             </div>
             </form>
 

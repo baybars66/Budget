@@ -1,34 +1,13 @@
 import React, { Component } from 'react'
-import Takvim from './Takvim';
+
 import Talep from './context';
-import Anahtar from './Anahtar';
+
 
  class Main extends Component {
 
-    state = {
-        durum : true,
-        
+  render() {
 
-        
-       }
-
-
-    work = (e)=>{
-       this.setState({
-        durum : ! this.state.durum
-
-       });
-      //console.log(this.state.durum);
-       }
-
-
-
-
-
-
-    render() {
-
-        const durum = this.state.durum;
+       
         return(
             <Talep>
                 {  // className="rounded float.right" alt="Cinque Terre"
@@ -49,10 +28,10 @@ import Anahtar from './Anahtar';
             <h2 className="text-center">MAIN PAGE</h2>
             
             <div className="d-flex justify-content-between">
-            <h3 className="m-3">BAYBARS </h3>
+            <h3 className="m-3">{AktifKul} </h3>
             <h5 className="m-4">You are the BEST in MARTAŞ </h5>
-            <img className="rounded m-2" src="./Baybars.jpg" alt="Generic placeholder image" width="100">
-              </img> 
+            <img className="rounded float-left" src={ resimyolu } alt={AktifKul}  ></img>
+          
             </div>
             </div>
 
@@ -69,7 +48,7 @@ import Anahtar from './Anahtar';
  }
 export default Main;
 
-//<img className="rounded float-left" src={ resimyolu } alt={AktifKul}  ></img>
+//  <img className="rounded m-2" src="./Baybars.jpg" alt="Generic placeholder image" width="100"> 
 
 
 // <div className="container p-1 my-2 bg-dark text-white">
