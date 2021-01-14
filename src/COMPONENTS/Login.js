@@ -3,7 +3,7 @@ import Talep from './context';
 import axios from 'axios';
 
  
-class User extends Component {
+class Login extends Component {
 
   state = {
         LoginKon: true,
@@ -21,15 +21,16 @@ class User extends Component {
   }
 
   ToMain = (dispatch, e) => {
+
     e.preventDefault();
       const {LoginKon, AktifKul} = this.state;
-      //console.log(AktifKul);
+    // console.log(e);
       dispatch({type:"AktifKul", payload:AktifKul});
       dispatch({type:"ToMain", payload:LoginKon});
   }
 
   PassKon = (e) => {
-       
+    console.log(e.target.getModifierState);
    
     //console.log(e.target.value);
     //console.log(this.state.kisiler[0].pass);
@@ -77,12 +78,13 @@ class User extends Component {
   // }
   
   componentDidMount = (e) =>{
-     console.log('login açıldı');
+    //  console.log('login açıldı');
+    //  console.log(this.state.AktifKul);
     }
 
  componentDidUpdate = (e)=>{
    
-  console.log('Update');
+  //console.log('Update');
  }
 
 
@@ -157,4 +159,4 @@ class User extends Component {
      )}
         }
 
-export default User;
+export default Login;

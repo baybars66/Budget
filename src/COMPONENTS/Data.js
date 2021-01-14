@@ -1,19 +1,37 @@
 import React, { Component } from 'react'
-
-import Talep from '../COMPONENTS/context';
-import Anahtar from '../COMPONENTS/Anahtar';
-import Takvim from '../COMPONENTS/Takvim';
+import DatePicker, { registerLocale }  from "react-datepicker";
+import Talep from './context';
 import axios from 'axios';
+import tr from "date-fns/locale/tr"; // the locale you want
+import "react-datepicker/dist/react-datepicker.css";
+ 
+import '../CSS/Anahtar.css';
 
+registerLocale("tr", tr); // register it with the name you want
 
  class Data extends Component {
-
+ 
+   
     state = {
         durum : true,
+
         country : [{
             id:"",
             name:""
         }],
+      
+        bilgi : 
+            {
+            kullanici: "",    
+            ulke: "",
+            icerik: "",
+            kategory: "",
+            adet: "",
+            fiyat:"",
+            gidis: new Date(),
+            donus: "",
+            tahmin: ""
+            },
 
         cat : [{
             id:"",
@@ -29,6 +47,53 @@ import axios from 'axios';
 
         
        }
+
+onChange = (e) => {
+       // console.log(e[0]);
+       // console.log(e[1]);
+       this.setState({
+
+        bilgi: {
+             ...this.state.bilgi,
+            gidis: e[0],
+            donus : e[1]    
+        }
+    });
+
+
+           // console.log(this.state.bilgi); //Güvenme setstate sonrası console
+      
+      
+}
+      
+       Ekle = async (e)=> {
+       // e.preventDefault();
+      // console.log(AktifKul);
+        //|| 
+        await this.setState({
+
+            bilgi: {
+                 ...this.state.bilgi,
+                 ulke : document.getElementById("select1").value,
+                 icerik : document.getElementById("select2").value,
+                 kategory : document.getElementById("select3").value,
+                 adet : document.getElementById("quantity").value,
+                 fiyat : document.getElementById("price").value,
+                  }
+                 
+                });
+                const {ulke, icerik, kategory, adet, fiyat, donus} = this.state.bilgi;
+        
+                if ((donus ==="" ||  ulke ==="" ||  icerik ==="" ||  kategory ==="" ||  adet ==="" ||  fiyat ==="") ) console.log("boş");     
+                 else
+                 console.log("hepsi dolu");
+               //const gonder = await axios.post("http://localhost:5006/Add", this.state.bilgi);
+               //console.log(this.state.bilgi);
+        
+      
+    }
+
+
 
 
     work = (e)=>{
@@ -57,20 +122,24 @@ import axios from 'axios';
 
     }
 
+componentDidUpdate = () =>{
 
 
 
+}
 
     render() {
-        const {country, cat,desc} = this.state;
+        const {country, cat,desc,durum} = this.state;
+        const {gidis, donus}= this.state.bilgi;
         // const durum = this.state.durum;
         // const cat = this.state.cat;
         // const desc = this.state.desc;
+
         return(
             <Talep>
                 {  // className="rounded float.right" alt="Cinque Terre"
                     value => {
-                        const {DataKon} = value;
+                        const {DataKon, AktifKul, endDate, startDate} = value;
                        // const {kisiler} =value;
                       // const isim = kisiler[0].name;//****************** */
                        //console.log(isim);
@@ -88,7 +157,7 @@ import axios from 'axios';
     <div className= 'col'>
         
             <label htmlFor="sel3">Country</label>
-            <select className="form-control mr-md-3" size="0" id="sel3" >   
+            <select className="form-control mr-md-3" size="0" id="select1"  >   
             <option></option>
             {  
             country.map( adam =>{
@@ -99,7 +168,7 @@ import axios from 'axios';
 
 
             <label htmlFor="sel5">Descrip</label>
-            <select className="form-control mr-md-3"  id="sel5" >   
+            <select className="form-control mr-md-3"  id="select2"  >   
             <option></option>
             {  
             desc.map( desss =>{
@@ -110,7 +179,7 @@ import axios from 'axios';
 
 
             <label htmlFor="sel4">Category</label>
-            <select className="form-control mr-md-3"  id="sel4" >   
+            <select className="form-control mr-md-3"  id="select3" >   
             <option></option>
 
             {  
@@ -119,41 +188,48 @@ import axios from 'axios';
                 })
             }
             </select>
-
-
             <label htmlFor="quan">Quantity</label>
             <input 
-             type="number" 
-             className="form-control" 
-             id="quan"
-             onChange = {this.PassKon}></input>
-
-
+            type="number" 
+            className="form-control" 
+            id="quantity"
+            onChange = {this.PassKon}></input>
             <label htmlFor="price">Price</label>
             <input 
-             type="number" 
-             className="form-control" 
-             id="price"
-             onChange = {this.PassKon}></input>
+            type="number" 
+            className="form-control" 
+            id="price"
+            onChange = {this.PassKon}></input>
         </div>
-    
-   
-     <div className='col'>
-
-           <div className = 'row'>
+        
+        <div className='col'>
+            <div className = 'row'>
                <div className='col d-flex align-items-end flex-column'>  
-               <Anahtar />
-                </div>
 
-              <div className='col d-flex align-items-end flex-column'>
-              <Takvim />
-              </div>
+               <div className="">{ durum ? "Estimate" : "Realized"}
+            <div className="mt-2">
+            <label  className="switch">{durum}
+            <input id="sel2" type="checkbox" value = {durum} onClick={this.degis}></input>
+            <span className="slider round"></span>
+            </label>
             </div>
-           <div className = 'row'>
+            </div>
+               </div>
+               <div className='col d-flex align-items-end flex-column'>
+               <DatePicker
+                selected={gidis}
+                onChange={this.onChange}
+                startDate={gidis}
+                endDate={donus}
+                selectsRange
+                inline
+                 />
+               </div>
+               </div>
+            <div className = 'row'>
                <div className='col d-flex align-items-end flex-column p-2'>  
-
-               <button type="buton" className="btn btn-primary" >Add</button>
-              </div>
+               <button type="submit" className="btn btn-primary" onClick={this.Ekle.bind(this, AktifKul, endDate, startDate)}>Add</button>
+               </div>
             </div>
     </div>
 

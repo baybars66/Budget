@@ -24,18 +24,14 @@ import '../CSS/Anahtar.css';
     render() {
         const durum = this.state.durum;
         return (
-         
-
             <div className="">{ durum ? "Estimate" : "Realized"}
-             
             <div className="mt-2">
-               <label  className="switch">{durum}
-             
-  <input id="sel2" type="checkbox" value = {durum} onClick={this.degis}></input>
-  <span className="slider round"></span>
-  </label>
- </div>
-</div>
+            <label  className="switch">{durum}
+            <input id="sel2" type="checkbox" value = {durum} onClick={this.degis}></input>
+            <span className="slider round"></span>
+            </label>
+            </div>
+            </div>
 
         
         )

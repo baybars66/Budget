@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-
 import Talep from './context';
 
-
- class Main extends Component {
+class Main extends Component {
 
   render() {
 
@@ -11,41 +9,39 @@ import Talep from './context';
         return(
             <Talep>
                 {  // className="rounded float.right" alt="Cinque Terre"
-                    value => {
+                 value => {
                         const {MainKon,AktifKul} = value;
-                       // const {kisiler} =value;
-                      // const isim = kisiler[0].name;//****************** */
-                       //console.log(isim);
-                       const resimyolu = "/pictures/" + AktifKul + ".jpg";
-                      
+                        <div>
+                        <button type="submit" className="btn btn-primary" >Log In</button>
+                        </div>
+                        const resimyolu = "/pictures/" + AktifKul + ".jpg";
+                    // const {kisiler} =value;
+                    // const isim = kisiler[0].name;//****************** */
+                    //console.log(isim);
                        
-        return (
-
-            <div className={MainKon ? "d-block" : "d-none"}>
-
-
-            <div className="container p-1 my-2 bg-dark text-white">
-            <h2 className="text-center">MAIN___PAGE</h2>
+                    return (
+                    <div className={MainKon ? "d-block" : "d-none"}>
+                    <div className="container p-1 my-2 bg-dark text-white">
+                    <h2 className="text-center">MAIN___PAGE</h2>
             
-            <div className="d-flex justify-content-between">
-            <h3 className="m-3">{AktifKul} </h3>
-            <h5 className="m-4">You are the BEST in MARTAŞ </h5>
-            <img className="rounded float-left" src={ resimyolu } alt={AktifKul}  ></img>
+                    <div className="d-flex justify-content-between">
+                    <h3 className="m-3">{AktifKul} </h3>
+                    <h5 className="m-4">You are the BEST in MARTAŞ </h5>
+                    <img className="rounded float-left" src={ resimyolu } alt={AktifKul}  ></img>
           
-            </div>
-            </div>
+                    </div>
+                    </div>
 
-            </div>
-            
-            
-        )
-    }
- }
+                    </div>
+                    
+                    )}
+                }
 
-</Talep>
-        )
-    }
- }
+            </Talep> )}
+        
+        }
+
+
 export default Main;
 
 //  <img className="rounded m-2" src="./Baybars.jpg" alt="Generic placeholder image" width="100"> 
