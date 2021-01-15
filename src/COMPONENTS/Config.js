@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Talep from './context';
-import axios from 'axios';
+import AddUser from './AddUser';
+import AddDesc from './AddDesc'
 
 
  class Config extends Component {
@@ -12,56 +13,26 @@ import axios from 'axios';
         }
         ],
 
-        api : "",
-
-        Consel2 : "",
-
-        Con : false
-
-
     }
-dene = async (basla, e)=>{
-  console.log(e.target.id);
-    const dede = await axios.delete('http://localhost:5006/kisiler/sil/' + e.target.id);
- // dispatch({type:"AktifKul", payload:AktifKul});
-  basla();
-    // this.setState({
-    //   AktifKul : baba.data[0].name,
-    //   Pass : baba.data[0].pass
-    // });
 
 
-}
-
-Getir = (e) =>{
+Getir = (dispatch, e) =>{
       const is =e.target.value;
       
 
       switch (is){
         case "USER": 
-             this.setState({
-                    Con: true
-                });
+        dispatch({type:"AddUserPageOpen", payload:true});
+        break;
+        case "DESCRIPTION": 
+        dispatch({type:"AddDescPageOpen", payload:true});
         break;
 
         default :
-           console.log(this.state.Con);
+          // console.log(this.state.Con);
 
         }
 
-        // if (e.target.value === "USER"){
-        //    this.setState({
-        //     Con : true
-
-        //    }); 
-        // }
-        //    else return(null);
-
-    
-
-        console.log(this.state.Con);
-
-        
     }
 
 
@@ -70,9 +41,9 @@ Getir = (e) =>{
         <Talep>
             {
                 value => {
-                const {ConfigKon, kisiler, basla} = value;
-                const {Con} = this.state;
-                console.log(Con);
+                const {ConfigKon, dispatch} = value;
+               
+               // console.log(Con);
            return (
          
             <div className= {ConfigKon ? "d-block container-fluid"  : "d-none container-fluid"} >
@@ -84,8 +55,8 @@ Getir = (e) =>{
             <form>
             <div className="form-group">
             
-            <label htmlFor="ConSel1">Select list:</label>
-            <select className="form-control" id="ConSel1" onChange = {this.Getir} >   
+            <label htmlFor="ConSel1">SELECT</label>
+            <select className="form-control" id="ConSel1" onChange = {this.Getir.bind(this, dispatch)} >   
             <option></option>
             <option>USER</option>
             <option>DESCRIPTION</option>
@@ -93,24 +64,11 @@ Getir = (e) =>{
             <option>CATEGORY</option>
             </select>
             
-            <div className= { Con ? "d-block"  : "d-none"}>
+            <div >
+            <AddUser />
+            <AddDesc  />
 
-            <ul>
-            {  
-              kisiler.map( adam =>{
-               return( 
-                    <li className=  "d-flex justify-content-between" key = {adam.id}> {adam.name} 
-                    <i className="fas fa-trash-alt " id ={adam.id} onClick= {this.dene.bind(this, basla)}> </i>
-                    </li>
-                      )
-              })
-            }
-
-
-
-
-            </ul>
-
+            
 
 
             </div>

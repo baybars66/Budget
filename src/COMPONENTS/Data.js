@@ -104,19 +104,18 @@ onChange = (e) => {
       //console.log(this.state.durum);
        }
 
-       componentDidMount = async () =>{
-        //  console.log('ilk mi');
- // const {dispatch}=this.props;
- const ulkeler = await axios.get("http://localhost:5006/Country");
- const cats = await axios.get("http://localhost:5006/Cat"); 
- const descs = await axios.get("http://localhost:5006/Desc"); 
- // console.log(adamlar.data);
- this.setState({
-    country : ulkeler.data,
-    cat : cats.data,
-    desc : descs.data
+       componentDidMount =() =>{
+      
+//  const ulkeler = await axios.get("http://localhost:5006/Country");
+//  const cats = await axios.get("http://localhost:5006/Cat"); 
+//  const descs = await axios.get("http://localhost:5006/Desc"); 
 
-   });
+//  this.setState({
+//     country : ulkeler.data,
+//     cat : cats.data,
+//     desc : descs.data
+
+//    });
 
  
 
@@ -129,7 +128,7 @@ componentDidUpdate = () =>{
 }
 
     render() {
-        const {country, cat,desc,durum} = this.state;
+        const {durum} = this.state;
         const {gidis, donus}= this.state.bilgi;
         // const durum = this.state.durum;
         // const cat = this.state.cat;
@@ -139,7 +138,7 @@ componentDidUpdate = () =>{
             <Talep>
                 {  // className="rounded float.right" alt="Cinque Terre"
                     value => {
-                        const {DataKon, AktifKul, endDate, startDate} = value;
+                        const {DataKon, AktifKul, endDate, startDate,country,cat,desc} = value;
                        // const {kisiler} =value;
                       // const isim = kisiler[0].name;//****************** */
                        //console.log(isim);

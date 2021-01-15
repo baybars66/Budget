@@ -46,6 +46,34 @@ const reducer = (state, action) => {
            DataKon : action.payload,
            PanelKon : false
         }
+        case "ConfigPageOpen" : 
+        // console.log('burada')
+        return{
+           ...state,
+           ConfigKon : action.payload,
+           PanelKon : false
+        }
+
+        case "AddUserPageOpen" : 
+        // console.log('burada')
+        return{
+           ...state,
+           AddUserKon : action.payload,
+           AddDescKon : false,
+          
+        }
+
+
+        case "AddDescPageOpen" : 
+        // console.log('burada')
+        return{
+           ...state,
+           AddDescKon : action.payload,
+           AddUserKon: false,
+          
+        }
+
+        
 
     default: //console.log('değil')
         return state
@@ -67,12 +95,29 @@ export class Arz extends Component {
           }
         ],
 
+
+        country : [{
+            id:"",
+            name:""
+        }],
+
+        cat : [{
+            id:"",
+            name:""
+        }],
+
+        desc : [{
+            id:"",
+            name:""
+        }],
+        
+
         startDate : new Date(),
         endDate : null,
 
         AktifKul : "",
 
-        LoginKon : true,
+        LoginKon : false,
 
         MainKon : false,
 
@@ -80,18 +125,24 @@ export class Arz extends Component {
 
         PanelKon: false,
 
-        ConfigKon: false,
+        ConfigKon: true,
+
+        AddUserKon: false,
+
+        AddDescKon: false,
 
         basla : async () =>{
-            //  console.log('ilk mi');
-            // const {dispatch}=this.props;
-            const adamlar = await axios.get("http://localhost:5006/kisiler");
-            // console.log(adamlar.data);
-            this.setState({
-               kisiler : adamlar.data
-    
-                 });
-                },
+                const adamlar = await axios.get("http://localhost:5006/kisiler");
+                const ulkeler = await axios.get("http://localhost:5006/Country");
+                const cats = await axios.get("http://localhost:5006/Cat"); 
+                const descs = await axios.get("http://localhost:5006/Desc"); 
+                this.setState({
+                  kisiler : adamlar.data,
+                  country : ulkeler.data,
+                  cat : cats.data,
+                  desc : descs.data
+                });
+        },
 
         dispatch : action => {
                 this.setState(state => reducer(state, action))
