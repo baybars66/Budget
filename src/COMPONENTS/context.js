@@ -72,7 +72,7 @@ export class Arz extends Component {
 
         AktifKul : "",
 
-        LoginKon : false,
+        LoginKon : true,
 
         MainKon : false,
 
@@ -80,7 +80,7 @@ export class Arz extends Component {
 
         PanelKon: false,
 
-        ConfigKon: true,
+        ConfigKon: false,
 
         basla : async () =>{
             //  console.log('ilk mi');

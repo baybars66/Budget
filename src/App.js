@@ -5,6 +5,7 @@ import Login from './COMPONENTS/Login';
 import Data from './COMPONENTS/Data';
 import Anapanel from './COMPONENTS/Anapanel';
 import Config from './COMPONENTS/Config';
+import Imza from './COMPONENTS/Imza';
 
 
 
@@ -26,6 +27,7 @@ class App extends Component {
 
 
  <Data />
+ <Imza />
     </div>
    );
   }
