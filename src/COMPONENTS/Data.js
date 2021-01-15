@@ -156,7 +156,7 @@ componentDidUpdate = () =>{
 
     <div className= 'col'>
         
-            <label htmlFor="sel3">Country</label>
+            <label htmlFor="select1">Country</label>
             <select className="form-control mr-md-3" size="0" id="select1"  >   
             <option></option>
             {  
@@ -167,7 +167,7 @@ componentDidUpdate = () =>{
             </select>
 
 
-            <label htmlFor="sel5">Descrip</label>
+            <label htmlFor="select2">Descrip</label>
             <select className="form-control mr-md-3"  id="select2"  >   
             <option></option>
             {  
@@ -178,7 +178,7 @@ componentDidUpdate = () =>{
             </select>
 
 
-            <label htmlFor="sel4">Category</label>
+            <label htmlFor="select3">Category</label>
             <select className="form-control mr-md-3"  id="select3" >   
             <option></option>
 
@@ -188,7 +188,7 @@ componentDidUpdate = () =>{
                 })
             }
             </select>
-            <label htmlFor="quan">Quantity</label>
+            <label htmlFor="quantity">Quantity</label>
             <input 
             type="number" 
             className="form-control" 

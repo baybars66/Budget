@@ -4,6 +4,7 @@ import Main from './COMPONENTS/Main';
 import Login from './COMPONENTS/Login';
 import Data from './COMPONENTS/Data';
 import Anapanel from './COMPONENTS/Anapanel';
+import Config from './COMPONENTS/Config';
 
 
 
@@ -21,7 +22,7 @@ class App extends Component {
 <Main />
 <Anapanel />
 
-
+<Config />
 
 
  <Data />

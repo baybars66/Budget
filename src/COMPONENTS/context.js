@@ -62,8 +62,7 @@ export class Arz extends Component {
           {
           id : "1",
           name : "bbbb",
-          salary : "",
-          dep : ""
+          
    
           }
         ],
@@ -73,7 +72,7 @@ export class Arz extends Component {
 
         AktifKul : "",
 
-        LoginKon : true,
+        LoginKon : false,
 
         MainKon : false,
 
@@ -81,7 +80,18 @@ export class Arz extends Component {
 
         PanelKon: false,
 
-        
+        ConfigKon: true,
+
+        basla : async () =>{
+            //  console.log('ilk mi');
+            // const {dispatch}=this.props;
+            const adamlar = await axios.get("http://localhost:5006/kisiler");
+            // console.log(adamlar.data);
+            this.setState({
+               kisiler : adamlar.data
+    
+                 });
+                },
 
         dispatch : action => {
                 this.setState(state => reducer(state, action))
@@ -89,15 +99,22 @@ export class Arz extends Component {
         }
     }
 
-    componentDidMount = async () =>{
-         //  console.log('ilk mi');
-         // const {dispatch}=this.props;
-         const adamlar = await axios.get("http://localhost:5006/kisiler");
-         // console.log(adamlar.data);
-         this.setState({
-            kisiler : adamlar.data
-              });
+    componentDidMount = () =>{
+     this.state.basla();
+
          }
+
+
+    basla = async () =>{
+        //  console.log('ilk mi');
+        // const {dispatch}=this.props;
+        const adamlar = await axios.get("http://localhost:5006/kisiler");
+        // console.log(adamlar.data);
+        this.setState({
+           kisiler : adamlar.data
+
+             });
+            }
 
     render() {
         return (
