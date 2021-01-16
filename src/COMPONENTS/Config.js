@@ -49,7 +49,7 @@ Getir = (dispatch, e) =>{
             <div className= {ConfigKon ? "d-block container-fluid"  : "d-none container-fluid"} >
 
             <div className="container-fluid p-1 my-3 bg-dark text-white">
-            <h1 className="text-center">CONFIG PANEL</h1>
+            <h2 className="text-center">CONFIG PANEL</h2>
             
             
             <form>

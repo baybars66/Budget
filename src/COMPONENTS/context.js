@@ -88,26 +88,26 @@ export class Arz extends Component {
     state = {
         kisiler : [
           {
-          id : "1",
+         
           name : "bbbb",
-          
+          pass: ""
    
           }
         ],
 
 
         country : [{
-            id:"",
+            
             name:""
         }],
 
         cat : [{
-            id:"",
+          
             name:""
         }],
 
         desc : [{
-            id:"",
+           
             name:""
         }],
         

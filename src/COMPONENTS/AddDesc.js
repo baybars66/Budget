@@ -7,16 +7,19 @@ import axios from 'axios';
         buton : false,
     }
 
-    KulEkle = (e) =>{
+    KulEkle = async (basla, e) =>{
         
         e.preventDefault();
+        const kul = document.getElementById("YeniKul").value;
         console.log("tıkladım");
-        
-
+        const nine = await axios.post('http://localhost:5006/Desc/Add/' + kul);
+        basla();
+     
     }
-    dene = async (basla, e)=>{
+
+    Sil = async (basla, e)=>{
         console.log(e.target.id);
-          const dede = await axios.delete('http://localhost:5006/kisiler/sil/' + e.target.id);
+          const dede = await axios.delete('http://localhost:5006/Desc/sil/' + e.target.id);
        // dispatch({type:"AktifKul", payload:AktifKul});
       
         basla();
@@ -52,13 +55,15 @@ import axios from 'axios';
                     
         return (
             <div className= {AddDescKon ? "d-block"   : "d-none "}>
+            <div>
             <h5>LIST :</h5>
+            </div>
             <ul>
             {  
               desc.map( adam =>{
                return( 
                     <li className=  "d-flex justify-content-between" key = {adam.name}> {adam.name} 
-                    <i className="fas fa-trash-alt " id ={adam.id} onClick= {this.dene.bind(this, basla)}> </i>
+                    <i className="fas fa-trash-alt " id ={adam.name} onClick= {this.Sil.bind(this, basla)}> </i>
                     </li>
                    
                       )
@@ -72,8 +77,8 @@ import axios from 'axios';
             </ul>
             <h5>ADD DESCRIPTION :</h5>
             <input className="d-none " disabled = {true} value= "Next"></input>
-            <input onChange= {this.PasKon}></input>
-            <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.KulEkle}>ADD</button>
+            <input id ="YeniKul" onChange= {this.PasKon}></input>
+            <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.KulEkle.bind(this, basla)}>ADD</button>
             
             
             </div>

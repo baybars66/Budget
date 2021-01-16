@@ -5,14 +5,38 @@ import axios from 'axios';
  class AddUser extends Component {
     state = {
         buton : false,
+        yenikul: {
+                 name :"",
+                 pass : ""
+        }
     }
+    Oku = (e)=>{
+        e.preventDefault();
 
-    KulEkle = (e) =>{
+        console.log(this.state.yenikul);
+    }
+    KulEkle = async (basla, e) =>{
         
         e.preventDefault();
-        console.log("tıkladım");
-        
+       
+        const kul = document.getElementById("NewKul").value;
+        const pass = document.getElementById("Password").value;
+       
+     await this.setState({
+           yenikul: {
+            ...this.state.yenikul,
+            name: kul,
+            pass: pass
 
+           }
+        });
+       
+        console.log(this.state.yenikul);
+        console.log(kul, pass);
+        //const nine = await axios.post('http://localhost:5006/Desc/Add/' + kul);
+        const nine = await axios.post('http://localhost:5006/Kull/Add/', this.state.yenikul);
+        basla();
+     
     }
     Sil = async (basla, e)=>{
         console.log(e.target.id);
@@ -57,8 +81,8 @@ import axios from 'axios';
             {  
               kisiler.map( adam =>{
                return( 
-                    <li className=  "d-flex justify-content-between" key = {adam.id}> {adam.name} 
-                    <i className="fas fa-trash-alt " id ={adam.id} onClick= {this.Sil.bind(this, basla)}> </i>
+                    <li className=  "d-flex justify-content-between" key = {adam.name}> {adam.name} 
+                    <i className="fas fa-trash-alt " id ={adam.name} onClick= {this.Sil.bind(this, basla)}> </i>
                     </li>
                    
                       )
@@ -71,9 +95,10 @@ import axios from 'axios';
 
             </ul>
             <h5>ADD USER</h5>
-            <input></input>
-            <input onChange= {this.PasKon}></input>
-            <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.KulEkle}>ADD</button>
+            <input id="NewKul" ></input>
+            <input id ="Password" onChange= {this.PasKon}></input>
+            <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.KulEkle.bind(this, basla)}>ADD</button>
+            <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.Oku}>Oku</button>
            
             </div>
         )
