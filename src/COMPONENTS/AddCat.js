@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Talep from './context';
 import axios from 'axios';
 
- class AddDesc extends Component {
+ class AddCat extends Component {
+
     state = {
         buton : true,
     }
@@ -10,24 +11,18 @@ import axios from 'axios';
     KulEkle = async (basla, e) =>{
         
         e.preventDefault();
-        const kul = document.getElementById("NewDesc").value;
-        console.log("tıkladım");
-        await axios.post('http://localhost:5006/Desc/Add/' + kul);
+        const cat = document.getElementById("NewCat").value;
+        await axios.post('http://localhost:5006/Cat/Add/' + cat);
         basla();
      
     }
 
     Sil = async (basla, e)=>{
         console.log(e.target.id);
-        await axios.delete('http://localhost:5006/Desc/sil/' + e.target.id);
-       // dispatch({type:"AktifKul", payload:AktifKul});
-      
+        await axios.delete('http://localhost:5006/Cat/sil/' + e.target.id);
+    
         basla();
-          // this.setState({
-          //   AktifKul : baba.data[0].name,
-          //   Pass : baba.data[0].pass
-          // });
-      
+         
       
       }
     PasKon =(e)=>{
@@ -46,13 +41,13 @@ import axios from 'axios';
 
 
     render() {
-         const Kon = this.props.Kon;
+        const Kon = this.props.Kon;
         return(
             <Talep>
                 {
                     value => {
-                    const {desc,basla} = value;
-                
+                    const {cat,basla} = value;
+                  
                     
         return (
             <div className= {Kon ? "d-block"   : "d-none "}>
@@ -61,7 +56,7 @@ import axios from 'axios';
             </div>
             <ul>
             {  
-              desc.map( adam =>{
+              cat.map( adam =>{
                return( 
                     <li className=  "d-flex justify-content-between" key = {adam.name}> {adam.name} 
                     <i className="fas fa-trash-alt " id ={adam.name} onClick= {this.Sil.bind(this, basla)}> </i>
@@ -76,9 +71,9 @@ import axios from 'axios';
 
 
             </ul>
-            <h5>ADD DESCRIPTION :</h5>
-            
-            <input id ="NewDesc" onChange= {this.PasKon}></input>
+            <h5>ADD CATEGORY :</h5>
+           
+            <input id ="NewCat" onChange= {this.PasKon}></input>
             <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.KulEkle.bind(this, basla)}>ADD</button>
             
             
@@ -91,4 +86,4 @@ import axios from 'axios';
         )}
 }
 
-export default AddDesc;
+export default AddCat;

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import DatePicker, { registerLocale }  from "react-datepicker";
-import Talep from './context';
 import axios from 'axios';
+import Talep from './context';
+//import axios from 'axios';
 import tr from "date-fns/locale/tr"; // the locale you want
 import "react-datepicker/dist/react-datepicker.css";
  
@@ -13,24 +14,26 @@ registerLocale("tr", tr); // register it with the name you want
  
    
     state = {
-        durum : true,
+        
 
         country : [{
             id:"",
             name:""
         }],
-      
+       startDate: new Date(),
+       endDate:"",
+        estimate: true,
         bilgi : 
             {
-            kullanici: "",    
             ulke: "",
+            kullanici: "", 
+            gidis: "",
+            donus: "",   
             icerik: "",
             kategory: "",
             adet: "",
             fiyat:"",
-            gidis: new Date(),
-            donus: "",
-            tahmin: ""
+            tahimini : "",
             },
 
         cat : [{
@@ -49,28 +52,43 @@ registerLocale("tr", tr); // register it with the name you want
        }
 
 onChange = (e) => {
-       // console.log(e[0]);
-       // console.log(e[1]);
+     var bir =e[0].toLocaleDateString();
+     var iki ="";
+    
+    if (e[1] != null) iki =e[1].toLocaleDateString();
+   
+   console.log(bir, iki);
        this.setState({
+            startDate: e[0],
+            endDate : e[1],
 
-        bilgi: {
-             ...this.state.bilgi,
-            gidis: e[0],
-            donus : e[1]    
-        }
+            bilgi: {
+                ...this.state.bilgi,
+                gidis: bir,
+                donus: iki
+
+            }
+      
+       
+
     });
 
-
+    //console.log(bir, iki);
            // console.log(this.state.bilgi); //Güvenme setstate sonrası console
       
       
 }
       
-       Ekle = async (e)=> {
+       Ekle = async (AktifKul, e)=> {
+       // console.log(this.state.bilgi.gidis);
        // e.preventDefault();
       // console.log(AktifKul);
         //|| 
+        var est = "";
+        if (this.state.estimate) est="YES"; else est ="NO";
+       
         await this.setState({
+            
 
             bilgi: {
                  ...this.state.bilgi,
@@ -79,17 +97,21 @@ onChange = (e) => {
                  kategory : document.getElementById("select3").value,
                  adet : document.getElementById("quantity").value,
                  fiyat : document.getElementById("price").value,
+                 kullanici: AktifKul,
+                 tahmini: est,
+                 
                   }
                  
                 });
-                const {ulke, icerik, kategory, adet, fiyat, donus} = this.state.bilgi;
+                const {ulke, kullanici, donus, icerik, kategory, adet, fiyat} = this.state.bilgi;
         
-                if ((donus ==="" ||  ulke ==="" ||  icerik ==="" ||  kategory ==="" ||  adet ==="" ||  fiyat ==="") ) console.log("boş");     
+                if ((kullanici ==="" || donus ==="" ||  ulke ==="" ||  icerik ==="" ||  kategory ==="" ||  adet ==="" ||  fiyat ==="") ) console.log("boş");     
                  else
-                 console.log("hepsi dolu");
-               //const gonder = await axios.post("http://localhost:5006/Add", this.state.bilgi);
-               //console.log(this.state.bilgi);
-        
+                 //console.log(AktifKul);
+                 //console.log(ulke, AktifKul, gidis, donus, icerik, kategory, adet, fiyat,estimate  );
+                console.log(this.state.bilgi)
+              await axios.post('http://localhost:5006/AddData/', this.state.bilgi);
+               //basla();
       
     }
 
@@ -98,8 +120,9 @@ onChange = (e) => {
 
     work = (e)=>{
        this.setState({
-        durum : ! this.state.durum
-
+        
+            estimate : ! this.state.estimate
+           
        });
       //console.log(this.state.durum);
        }
@@ -128,8 +151,8 @@ componentDidUpdate = () =>{
 }
 
     render() {
-        const {durum} = this.state;
-        const {gidis, donus}= this.state.bilgi;
+        const {estimate} = this.state;
+        const {startDate, endDate}= this.state;
         // const durum = this.state.durum;
         // const cat = this.state.cat;
         // const desc = this.state.desc;
@@ -138,7 +161,7 @@ componentDidUpdate = () =>{
             <Talep>
                 {  // className="rounded float.right" alt="Cinque Terre"
                     value => {
-                        const {DataKon, AktifKul, endDate, startDate,country,cat,desc} = value;
+                        const {DataKon, AktifKul,desc, cat,country} = value;
                        // const {kisiler} =value;
                       // const isim = kisiler[0].name;//****************** */
                        //console.log(isim);
@@ -150,7 +173,7 @@ componentDidUpdate = () =>{
 <div className={DataKon ? "d-block" : "d-none"}>
 <div className="container d-flex justify-content-end p-5 my-3 bg-dark text-white">
 
-<div className="row d-flex justify-content-end">
+<div className="row d-flex justify-content-between">
 
 
     <div className= 'col'>
@@ -205,10 +228,10 @@ componentDidUpdate = () =>{
             <div className = 'row'>
                <div className='col d-flex align-items-end flex-column'>  
 
-               <div className="">{ durum ? "Estimate" : "Realized"}
+            <div className="">{ estimate ? "Estimate" : "Realized"}
             <div className="mt-2">
-            <label  className="switch">{durum}
-            <input id="sel2" type="checkbox" value = {durum} onClick={this.degis}></input>
+            <label  className="switch">{estimate}
+            <input id="sel2" type="checkbox" value = {estimate} onClick={this.work}></input>
             <span className="slider round"></span>
             </label>
             </div>
@@ -216,18 +239,19 @@ componentDidUpdate = () =>{
                </div>
                <div className='col d-flex align-items-end flex-column'>
                <DatePicker
-                selected={gidis}
+                selected={startDate}
                 onChange={this.onChange}
-                startDate={gidis}
-                endDate={donus}
+                startDate={startDate}
+                endDate={endDate}
                 selectsRange
+                dateFormat="yyyy"
                 inline
                  />
                </div>
                </div>
             <div className = 'row'>
                <div className='col d-flex align-items-end flex-column p-2'>  
-               <button type="submit" className="btn btn-primary" onClick={this.Ekle.bind(this, AktifKul, endDate, startDate)}>Add</button>
+               <button type="submit" className="btn btn-primary" onClick={this.Ekle.bind(this, AktifKul)}>Add</button>
                </div>
             </div>
     </div>

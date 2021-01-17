@@ -26,14 +26,14 @@ import axios from 'axios';
 
            }
         });
-        await axios.post('http://localhost:5006/Kull/Add/', this.state.yenikul);
+       const nine = await axios.post('http://localhost:5006/Kull/Add/', this.state.yenikul);
         basla();
      
     }
 
     Sil = async (basla, e)=>{
         console.log(e.target.id);
-        await axios.delete('http://localhost:5006/kisiler/sil/' + e.target.id);
+        const dede = await axios.delete('http://localhost:5006/kisiler/sil/' + e.target.id);
         basla();
         
     }
@@ -63,16 +63,15 @@ import axios from 'axios';
 
 
     render() {
-        const Kon = this.props.Kon;
         return(
             <Talep>
                 {
                     value => {
-                    const {kisiler,basla} = value;
+                    const {AddUserKon,kisiler,basla} = value;
                     //console.log(AddUserKon);
                     
         return (
-            <div className= {Kon ? "d-block"   : "d-none "}>
+            <div className= {AddUserKon ? "d-block"   : "d-none "}>
             <h5>List :</h5>
             <ul>
             {  

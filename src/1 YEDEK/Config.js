@@ -3,7 +3,6 @@ import Talep from './context';
 import AddUser from './AddUser';
 import AddDesc from './AddDesc';
 import AddCat from './AddCat';
-import AddCountry from './AddCountry';
 
 
  class Config extends Component {
@@ -14,13 +13,8 @@ import AddCountry from './AddCountry';
             name :""
         }
         ],
-        AddUserKon: false,
-        AddCatKon : false,
-        AddDescKon: false,
-        AddCounKon:false,
-        
 
-        
+        AddCatKon : false,
 
     }
 
@@ -31,62 +25,24 @@ Getir = (dispatch, e) =>{
 
       switch (is){
         case "USER": 
+        dispatch({type:"AddUserPageOpen", payload:true});
         this.setState({
-          AddUserKon: true,
           AddCatKon : false,
-          AddDescKon: false,
-          AddCounKon:false,
-          
         });
         break;
         case "DESCRIPTION": 
         dispatch({type:"AddDescPageOpen", payload:true});
         this.setState({
-          AddUserKon: false,
-        AddCatKon : false,
-        AddDescKon: true,
-        AddCounKon:false,
-        
+          AddCatKon : false,
         });
         break;
         case "CATEGORY": 
         this.setState({
-          AddUserKon: false,
           AddCatKon : true,
-          AddDescKon: false,
-          AddCounKon:false,
-          
-        });
-        break;
-
-        case "COUNTRY": 
-        this.setState({
-          AddUserKon: false,
-          AddCatKon : false,
-          AddDescKon: false,
-          AddCounKon: true,
-          
-        });
-        break;
-        case "": 
-        console.log("bu");
-        this.setState({
-          AddUserKon: false,
-          AddCatKon : false,
-          AddDescKon: false,
-          AddCounKon:false,
-          
         });
         break;
 
         default :
-        this.setState({
-          AddUserKon: false,
-          AddCatKon : false,
-          AddDescKon: false,
-          AddCounKon:false,
-          
-        });
           // console.log(this.state.Con);
 
         }
@@ -95,7 +51,7 @@ Getir = (dispatch, e) =>{
 
 
     render() {
-       const {AddCounKon, AddCatKon, AddDescKon, AddUserKon}= this.state;
+       const AddCatKon = this.state.AddCatKon;
          return(
         <Talep>
             {
@@ -108,7 +64,7 @@ Getir = (dispatch, e) =>{
             <div className= {ConfigKon ? "d-block container-fluid"  : "d-none container-fluid"} >
 
             <div className="container-fluid p-1 my-3 bg-dark text-white">
-            <h4 className="text-center">CONFIG PANEL</h4>
+            <h2 className="text-center">CONFIG PANEL</h2>
             
             
             <form>
@@ -124,11 +80,9 @@ Getir = (dispatch, e) =>{
             </select>
             
             <div >
-            <AddUser Kon={AddUserKon}/>
-            <AddDesc Kon={AddDescKon} />
-            <AddCat Kon={AddCatKon} />
-            <AddCountry Kon={AddCounKon} />
-            
+            <AddUser />
+            <AddDesc  />
+            <AddCat Kon={AddCatKon}/>
 
             
 

@@ -9,7 +9,7 @@ class Login extends Component {
         LoginKon: true,
         AktifKul: "Deneme",
         Pass:"",
-        ButonKon : false,
+       
         kisiler: [{
           id: "",
           name :"NO CONNECTION",
@@ -24,8 +24,12 @@ class Login extends Component {
 
     e.preventDefault();
       const {LoginKon, AktifKul} = this.state;
-    // console.log(e);
+      var bukon = false;
+      if (AktifKul==="Suela")  bukon= true;
+       else bukon=false;
+    console.log(bukon);
       dispatch({type:"AktifKul", payload:AktifKul});
+      dispatch({type:"BuKon", payload:bukon});
       dispatch({type:"ToMain", payload:LoginKon});
   }
 

@@ -6,6 +6,7 @@ class Anapanel extends Component {
 
     state = {
         deneme: false,
+       
     }
 
     BilgiGiris = (dispatch, e)=>{
@@ -19,9 +20,15 @@ class Anapanel extends Component {
         dispatch({type:"ConfigPageOpen", payload:true});
 
     }  
-    
+    ButtKon = (AktifKul, e) =>{
+        console.log(AktifKul);
+        if (AktifKul==="Suela") return (false);
+        else return(true);
+
+    } 
     componentDidMount = () =>{
         //console.log('Anapanel açıldı');
+
     }
 
     render() {
@@ -30,7 +37,7 @@ class Anapanel extends Component {
             <Talep>
                 {
                     value => {
-                    const {PanelKon, dispatch} = value;
+                    const {AktifKul, PanelKon, dispatch} = value;
                     
                     // const {dispatch}=value;        
                    // console.log(PanelKon);
@@ -54,7 +61,17 @@ class Anapanel extends Component {
                     <button type="submit" className="btn btn-secondary btn-sm" onClick={this.BilgiGiris.bind(this, dispatch)}>ADD DATA PAGE</button>
                     </div>
                     <div className="col">
-                    <button type="submit" className="btn btn-secondary btn-sm" onClick={this.toConfig.bind(this, dispatch)} >CONFIGRATION</button>
+                    <button type="submit" disabled = 
+                       {(() => {
+                        switch (AktifKul) {
+                          case "Suela":   return false;
+                          case "Baybars": return false;
+                          case "Ziya":  return false;
+                          default:      return true;
+                        }
+                      })()}
+                    
+                    className="btn btn-secondary btn-sm" onClick={this.toConfig.bind(this, dispatch)} >CONFIGRATION</button>
                     </div>
                     
             

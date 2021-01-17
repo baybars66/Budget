@@ -23,13 +23,25 @@ const reducer = (state, action) => {
           ...state,
           LoginKon: false,
           MainKon: true,
-          PanelKon: true 
+          PanelKon: true,
+          DataKon: false,
+          ConfigKon: false,
         }
     case "AktifKul" : 
         // console.log('burada')
+        
         return{
            ...state,
            AktifKul : action.payload
+           
+        }
+        case "Bukon" : 
+        // console.log('burada')
+        
+        return{
+           ...state,
+           ButtKon : action.payload
+           
         }
 
     case "gidis" : 
@@ -54,24 +66,8 @@ const reducer = (state, action) => {
            PanelKon : false
         }
 
-        case "AddUserPageOpen" : 
-        // console.log('burada')
-        return{
-           ...state,
-           AddUserKon : action.payload,
-           AddDescKon : false,
-          
-        }
 
 
-        case "AddDescPageOpen" : 
-        // console.log('burada')
-        return{
-           ...state,
-           AddDescKon : action.payload,
-           AddUserKon: false,
-          
-        }
 
         
 
@@ -89,7 +85,7 @@ export class Arz extends Component {
         kisiler : [
           {
          
-          name : "bbbb",
+          name : "Yo Connection",
           pass: ""
    
           }
@@ -115,21 +111,19 @@ export class Arz extends Component {
         startDate : new Date(),
         endDate : null,
 
-        AktifKul : "",
+     
+
+        AktifKul : "NoConn",
 
         LoginKon : false,
 
         MainKon : false,
 
-        DataKon: false,
+        DataKon: true,
 
         PanelKon: false,
 
-        ConfigKon: true,
-
-        AddUserKon: false,
-
-        AddDescKon: false,
+        ConfigKon: false,
 
         basla : async () =>{
                 const adamlar = await axios.get("http://localhost:5006/kisiler");
@@ -152,6 +146,7 @@ export class Arz extends Component {
 
     componentDidMount = () =>{
      this.state.basla();
+      
 
          }
 
