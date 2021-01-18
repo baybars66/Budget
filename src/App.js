@@ -26,7 +26,7 @@ class App extends Component {
 
 
  <Data />
- <ShowDataPage />
+<ShowDataPage />
  <Imza />
     </div>
    );

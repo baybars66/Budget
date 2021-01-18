@@ -82,7 +82,7 @@ Ekle = async (AktifKul, e)=> {
         else
          await axios.post('http://localhost:5006/AddData/', this.state.bilgi)
          .then ( (response)=>{
-            console.log(response.status);
+            console.log(response);
             if (response.status ===200)
               this.setState({
                   butonrengi: "btn btn-success",

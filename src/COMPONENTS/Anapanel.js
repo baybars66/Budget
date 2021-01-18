@@ -15,6 +15,13 @@ class Anapanel extends Component {
 
     }   
     
+
+    ToShowPage = (dispatch, e)=>{
+        e.preventDefault();
+        dispatch({type:"ShowPageOpen", payload:true});
+
+    }   
+
     toConfig = (dispatch, e)=>{
         e.preventDefault();
         dispatch({type:"ConfigPageOpen", payload:true});
@@ -59,7 +66,7 @@ class Anapanel extends Component {
                     <div className="row d-flex justify-content-around">
 
                     <div className="col">
-                    <button type="submit" className="btn btn-secondary btn-sm" onClick={this.BilgiGiris.bind(this, dispatch)}>SHOW DATA PAGE</button>
+                    <button type="submit" className="btn btn-secondary btn-sm" onClick={this.ToShowPage.bind(this, dispatch)}>SHOW DATA PAGE</button>
                     </div>
 
                     <div className="col">

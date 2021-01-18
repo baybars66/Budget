@@ -66,7 +66,15 @@ const reducer = (state, action) => {
            ConfigKon : action.payload,
            PanelKon : false
         }
-
+        
+        case "ShowPageOpen" : 
+        // console.log('burada')
+        return{
+           ...state,
+           ShowDataKon : action.payload,
+           PanelKon : false
+        }
+        
 
 
 
@@ -114,7 +122,7 @@ export class Arz extends Component {
             Donus: "",
             Descrip: "",
             Category: "",
-            Qunatity: "",
+            Quantity: "",
             Price: "",
             Amount:""
         }],
@@ -126,7 +134,7 @@ export class Arz extends Component {
 
         AktifKul : "NoConn",
 
-        LoginKon : false,
+        LoginKon : true,
 
         MainKon : false,
 
@@ -136,7 +144,7 @@ export class Arz extends Component {
 
         ConfigKon: false,
 
-        ShowDataKon: true,
+        ShowDataKon: false,
 
         basla : async () =>{
                 const adamlar = await axios.get("http://localhost:5006/kisiler");
