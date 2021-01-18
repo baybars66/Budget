@@ -14,6 +14,9 @@ registerLocale("tr", tr); // register it with the name you want
  
     state = {
        
+        butonyazi: "ADD",
+        butonrengi: "btn btn-primary",
+
         startDate: new Date(),
         endDate:"",
 
@@ -40,6 +43,8 @@ onChange = (e) => {
        //console.log(bir, iki);
         this.setState({
 
+           
+
             startDate: e[0],
             endDate : e[1],
 
@@ -52,7 +57,12 @@ onChange = (e) => {
 }
       
 Ekle = async (AktifKul, e)=> {
-      
+
+    this.setState({
+        butonyazi: "RUNING",
+        butonrengi: "btn btn-danger",
+
+    });  
     var est = "";
     if (this.state.estimate) est="YES"; else est ="NO";
     await this.setState({
@@ -70,7 +80,24 @@ Ekle = async (AktifKul, e)=> {
     const {ulke, kullanici, donus, icerik, kategory, adet, fiyat} = this.state.bilgi;
     if ((kullanici ==="" || donus ==="" ||  ulke ==="" ||  icerik ==="" ||  kategory ==="" ||  adet ==="" ||  fiyat ==="") ) console.log("boş");     
         else
-         await axios.post('http://localhost:5006/AddData/', this.state.bilgi);
+         await axios.post('http://localhost:5006/AddData/', this.state.bilgi)
+         .then ( (response)=>{
+            console.log(response.status);
+            if (response.status ===200)
+              this.setState({
+                  butonrengi: "btn btn-success",
+                  butonyazi: "OK"
+              });
+              else
+              this.setState({
+                butonrengi: "btn btn-danger",
+                butonyazi: "ERROR"
+            });
+      })
+      .catch( (err)=>{
+          console.log(err);
+
+      });
          //basla();
       
 }
@@ -172,7 +199,7 @@ render() {
                      </div>
                     <div className = 'row'>
                     <div className='col d-flex align-items-end flex-column p-2'>  
-                    <button type="submit" className="btn btn-primary" onClick={this.Ekle.bind(this, AktifKul)}>Add</button>
+                    <button type="button" className={this.state.butonrengi} onClick={this.Ekle.bind(this, AktifKul)}>{this.state.butonyazi}</button>
                     </div>
                     </div>
                      </div>

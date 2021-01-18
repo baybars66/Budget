@@ -6,8 +6,7 @@ import Data from './COMPONENTS/Data';
 import Anapanel from './COMPONENTS/Anapanel';
 import Config from './COMPONENTS/Config';
 import Imza from './COMPONENTS/Imza';
-
-
+import ShowDataPage from './COMPONENTS/ShowDataPage';
 
 
 
@@ -27,6 +26,7 @@ class App extends Component {
 
 
  <Data />
+ <ShowDataPage />
  <Imza />
     </div>
    );

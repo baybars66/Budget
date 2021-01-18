@@ -57,6 +57,11 @@ class Anapanel extends Component {
                     <form>
                     <div className="form-group">
                     <div className="row d-flex justify-content-around">
+
+                    <div className="col">
+                    <button type="submit" className="btn btn-secondary btn-sm" onClick={this.BilgiGiris.bind(this, dispatch)}>SHOW DATA PAGE</button>
+                    </div>
+
                     <div className="col">
                     <button type="submit" className="btn btn-secondary btn-sm" onClick={this.BilgiGiris.bind(this, dispatch)}>ADD DATA PAGE</button>
                     </div>
@@ -73,6 +78,8 @@ class Anapanel extends Component {
                     
                     className="btn btn-secondary btn-sm" onClick={this.toConfig.bind(this, dispatch)} >CONFIGRATION</button>
                     </div>
+
+                    
                     
             
                     </div>

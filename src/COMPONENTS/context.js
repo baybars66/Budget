@@ -26,6 +26,7 @@ const reducer = (state, action) => {
           PanelKon: true,
           DataKon: false,
           ConfigKon: false,
+          ShowDataKon: false,
         }
     case "AktifKul" : 
         // console.log('burada')
@@ -107,6 +108,16 @@ export class Arz extends Component {
             name:""
         }],
         
+        AnaData: [{
+            user: "",
+            Depart:"",
+            Donus: "",
+            Descrip: "",
+            Category: "",
+            Qunatity: "",
+            Price: "",
+            Amount:""
+        }],
 
         startDate : new Date(),
         endDate : null,
@@ -115,7 +126,7 @@ export class Arz extends Component {
 
         AktifKul : "NoConn",
 
-        LoginKon : true,
+        LoginKon : false,
 
         MainKon : false,
 
@@ -124,6 +135,8 @@ export class Arz extends Component {
         PanelKon: false,
 
         ConfigKon: false,
+
+        ShowDataKon: true,
 
         basla : async () =>{
                 const adamlar = await axios.get("http://localhost:5006/kisiler");
