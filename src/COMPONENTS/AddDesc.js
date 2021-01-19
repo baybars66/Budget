@@ -59,11 +59,11 @@ import axios from 'axios';
             <div>
             <h5>LIST :</h5>
             </div>
-            <ul>
+            <ul className="list-group">
             {  
               desc.map( adam =>{
                return( 
-                    <li className=  "d-flex justify-content-between" key = {adam.name}> {adam.name} 
+                    <li className=  "d-flex justify-content-between border border-light" key = {adam.name}> {adam.name} 
                     <i className="fas fa-trash-alt " id ={adam.name} onClick= {this.Sil.bind(this, basla)}> </i>
                     </li>
                    
@@ -77,10 +77,14 @@ import axios from 'axios';
 
             </ul>
             <h5>ADD DESCRIPTION :</h5>
-            
-            <input id ="NewDesc" onChange= {this.PasKon}></input>
+            <div className="row">
+            <div className="col">
+            <input className="form-control" id ="NewDesc" onChange= {this.PasKon}></input>
+            </div>
+            <div className="col">
             <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.KulEkle.bind(this, basla)}>ADD</button>
-            
+            </div>
+            </div>
             
             </div>
         )

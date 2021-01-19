@@ -68,6 +68,12 @@ class Login extends Component {
       AktifKul : baba.data[0].name,
       Pass : baba.data[0].pass
     });
+
+    const üstüne = function getFocus() {
+      document.getElementById("pwd").focus();
+    }
+    üstüne();
+
    //const {dispatch}=this.props;
    //dispatch({type:"AktifKul", payload:this.AktifKul});
   }
@@ -114,7 +120,7 @@ class Login extends Component {
             <h1 className="text-center">LOGIN</h1>
             </div>
 
-            <div className="container-fluid">
+            <div className="container-fluid ">
             <div className="jumbotron">
             <form>
             <div className="form-group">

@@ -107,14 +107,14 @@ Getir = (dispatch, e) =>{
          
             <div className= {ConfigKon ? "d-block container-fluid"  : "d-none container-fluid"} >
 
-            <div className="container-fluid p-1 my-3 bg-dark text-white">
+            <div className="container-fluid p-1 my-3 bg-secondary text-white">
             <h4 className="text-center">CONFIG PANEL</h4>
             
             
             <form>
             <div className="form-group">
             
-            <label htmlFor="ConSel1">SELECT</label>
+            
             <select className="form-control" id="ConSel1" onChange = {this.Getir.bind(this, dispatch)} >   
             <option></option>
             <option>USER</option>

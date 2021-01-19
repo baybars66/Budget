@@ -6,8 +6,10 @@ import axios from 'axios';
 
     state = {
         buton : true,
-         
+        SwitchKon : "NO", 
+        ulke:"",
         AnaData: [{
+            id:"",
             user: "",
             Depart:"",
             Donus: "",
@@ -18,43 +20,68 @@ import axios from 'axios';
             Amount:""
         }],
     }
+Work =()=>{
+    if(this.state.SwitchKon==="YES")
+     this.setState({
+            SwitchKon: "NO"
 
-Goster = async(dispatch, e) =>{
-  console.log(e.target.value);
-  await axios.get('http://localhost:5006/Data/' + e.target.value)
+     });
+      else 
+      
+      this.setState({
+             SwitchKon: "YES"
+ 
+      });
+}
 
-   .then ( (response)=>{
+Degis = async (e)=>{
+   await this.setState({
+        ulke: e.target.value
+    })
+    
+    this.Goster();
+
+}
+
+Goster = async() =>{
+ 
+    const istek = {
+      ulke : this.state.ulke,
+      estimate: this.state.SwitchKon
+    }
+  //console.log(istek);
+  await axios.post('http://localhost:5006/GetData/', istek)
+    .then ( (response)=>{
            // console.log(response.data);
             this.setState({
                 AnaData : response.data
-
-
             });
-            console.log(this.state.AnaData);
-    //         if (response.status ===200)
-    //           this.setState({
-    //               butonrengi: "btn btn-success",
-    //               butonyazi: "OK"
-    //           });
-    //           else
-    //           this.setState({
-    //             butonrengi: "btn btn-danger",
-    //             butonyazi: "ERROR"
-    //         });
-    //   })
-    //   .catch( (err)=>{
-    //       console.log(err);
-
-      });
-
-
-
+    });
 }
-    Sil = async (basla, e)=>{
-        console.log(e.target.id);
-        await axios.delete('http://localhost:5006/Cat/sil/' + e.target.id);
-    
-        basla();
+
+
+Sil = async (e)=>{
+        const ulke =document.getElementById("ulkeler").value;
+        const silinecek ={
+            id: e.target.id,
+            ulke: ulke
+        };
+       console.log(silinecek);
+        await axios.post('http://localhost:5006/Data/sil/', silinecek)
+        .then ( (response)=>{
+             console.log(response.data);
+             this.Goster();
+            //  this.setState({
+            //      AnaData : response.data
+ 
+ 
+            //  });
+
+       
+ 
+       });
+ 
+       // basla();
          
       
       }
@@ -74,24 +101,31 @@ Goster = async(dispatch, e) =>{
 
 
     render() {
-     const {AnaData} = this.state;
+     const {AnaData, SwitchKon} = this.state;
         return(
             <Talep>
                 {
                     value => {
-                    const {country,ShowDataKon, dispatch} = value;
+                    const {country,ShowDataKon} = value;
                   
                     
         return (
             <div className= {ShowDataKon ? "d-block"   : "d-none "}>
-            <div>
-            <h5>LIST :</h5>
-            </div>
-
-            <div className="form-group">
             
-            <label htmlFor="sel1">Select list:</label>
-            <select className="form-control" id="sel1" onChange = {this.Goster.bind(this, dispatch)}  >   
+          
+            <div className="row ">
+
+            <div className="col">{ SwitchKon==="YES" ? "Estimate" : "Realized"}
+                <div></div>
+                    <label  className="switch">
+                    <input id="sel2" type="checkbox" onChange={this.Work}></input>
+                    <span className="slider round"></span>
+                    </label>
+                    </div>
+
+            <div className="col">
+            <label htmlFor="ulkeler">Select list:</label>
+            <select className="form-control" id="ulkeler" onChange = {this.Degis}  >   
             <option></option>
             {  
               country.map( adam =>{
@@ -101,6 +135,9 @@ Goster = async(dispatch, e) =>{
               })
             }
             </select>
+
+            </div>
+          
             <div>
             <h5>List:</h5>
             <table className="table table-striped">
@@ -124,7 +161,7 @@ Goster = async(dispatch, e) =>{
            
             {  
               AnaData.map( bilgi =>{
-               return( <tr>
+               return( <tr key= {bilgi.id}>
                  
                 <th scope="row">{bilgi.User}</th> 
                    
@@ -135,7 +172,7 @@ Goster = async(dispatch, e) =>{
                     <td> {bilgi.Quantity} </td> 
                     <td> {bilgi.Price} </td> 
                     <td> {bilgi.Amount}</td> 
-                    <td> <i className="fas fa-trash-alt " id ={bilgi.User} onClick= {this.Sil}> </i></td> 
+                    <td> <i className="fas fa-trash-alt " id ={bilgi.id}   onClick= {this.Sil}> </i></td> 
                     </tr>
                       )
                       

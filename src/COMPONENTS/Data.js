@@ -188,7 +188,7 @@ render() {
                     <div className='col d-flex align-items-end flex-column'>
                     <DatePicker
                         selected={startDate}
-                     onChange={this.onChange}
+                        onChange={this.onChange}
                         startDate={startDate}
                         endDate={endDate}
                         selectsRange
