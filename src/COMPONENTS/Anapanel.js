@@ -27,16 +27,14 @@ class Anapanel extends Component {
         dispatch({type:"ConfigPageOpen", payload:true});
 
     }  
-    ButtKon = (AktifKul, e) =>{
-        console.log(AktifKul);
-        if (AktifKul==="Suela") return (false);
-        else return(true);
 
-    } 
-    componentDidMount = () =>{
-        //console.log('Anapanel açıldı');
+    // ButtKon = (AktifKul, e) =>{
+    //     console.log(AktifKul);
+    //     if (AktifKul==="Suela") return (false);
+    //     else return(true);
 
-    }
+    // } 
+
 
     render() {
 
@@ -45,13 +43,7 @@ class Anapanel extends Component {
                 {
                     value => {
                     const {AktifKul, PanelKon, dispatch} = value;
-                    
-                    // const {dispatch}=value;        
-                   // console.log(PanelKon);
-                    //iler = this.state.kisiler;
-                    //const{kisiler} = this.state.kisiler;
-                  
-                    //  const gorunum = this.state.gorunum;
+            
 
                  return (
                     <div className={PanelKon ? "d-block" : "d-none"}>

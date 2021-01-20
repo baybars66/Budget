@@ -12,13 +12,11 @@ const reducer = (state, action) => {
          kisiler: state.kisiler.filter( kisi=> action.payload !== kisi.id)
         }
     case "ekle" : 
-        // console.log('burada')
         return{
          ...state,
          kisiler :[...state.kisiler,action.payload]
         }
     case "ToMain" : 
-        // console.log('burada')
         return{
           ...state,
           LoginKon: false,
@@ -29,24 +27,17 @@ const reducer = (state, action) => {
           ShowDataKon: false,
         }
     case "AktifKul" : 
-        // console.log('burada')
-        
         return{
            ...state,
            AktifKul : action.payload
-           
         }
-        case "Bukon" : 
-        // console.log('burada')
-        
+    case "Bukon" : 
         return{
            ...state,
            ButtKon : action.payload
-           
         }
 
     case "gidis" : 
-        // console.log('burada')
         return{
            ...state,
            startDate : action.payload
@@ -59,27 +50,20 @@ const reducer = (state, action) => {
            DataKon : action.payload,
            PanelKon : false
         }
-        case "ConfigPageOpen" : 
+    case "ConfigPageOpen" : 
         // console.log('burada')
         return{
            ...state,
            ConfigKon : action.payload,
            PanelKon : false
         }
-        
-        case "ShowPageOpen" : 
+    case "ShowPageOpen" : 
         // console.log('burada')
         return{
            ...state,
            ShowDataKon : action.payload,
            PanelKon : false
         }
-        
-
-
-
-        
-
     default: //console.log('değil')
         return state
 
@@ -149,21 +133,17 @@ export class Arz extends Component {
         basla : async () =>{
             console.log("burda");
                const adamlar = await axios.get("http://88.250.131.163:10066/kisiler");
-             // const adamlar = await axios.get("http://localhost:5006/kisiler");
-              // const adamlar = await axios.get("http://127.0.0.1:5006/kisiler");
                 // .then(resp=>{
                 //     console.log(resp);
                 // })
                 // .catch(err =>{
                 //     console.error(err);
                 // });
-
-
-                 const ulkeler = await axios.get("http://88.250.131.163:10066/Country");
-                 const cats = await axios.get("http://88.250.131.163:10066/Cat"); 
-                 const descs = await axios.get("http://88.250.131.163:10066/Desc"); 
-                 this.setState({
-                  kisiler : adamlar.data,
+               const ulkeler = await axios.get("http://88.250.131.163:10066/Country");
+               const cats = await axios.get("http://88.250.131.163:10066/Cat"); 
+               const descs = await axios.get("http://88.250.131.163:10066/Desc"); 
+                this.setState({
+                   kisiler : adamlar.data,
                    country : ulkeler.data,
                    cat : cats.data,
                    desc : descs.data
@@ -176,23 +156,10 @@ export class Arz extends Component {
         }
     }
 
-    componentDidMount = () =>{
+componentDidMount = () =>{
      this.state.basla();
       
-
-         }
-
-
-    // basla = async () =>{
-    //     //  console.log('ilk mi');
-    //     // const {dispatch}=this.props;
-    //     const adamlar = await axios.get("http://88.250.131.163:5006/kisiler");
-    //     // console.log(adamlar.data);
-    //     this.setState({
-    //        kisiler : adamlar.data
-
-    //          });
-    //         }
+}
 
     render() {
         return (

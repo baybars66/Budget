@@ -8,7 +8,6 @@ import axios from 'axios';
     }
 
     KulEkle = async (basla, e) =>{
-        
         e.preventDefault();
         const kul = document.getElementById("NewDesc").value;
         console.log("tıkladım");
@@ -21,24 +20,17 @@ import axios from 'axios';
         console.log(e.target.id);
         await axios.delete('http://88.250.131.163:10066/Desc/sil/' + e.target.id);
        // dispatch({type:"AktifKul", payload:AktifKul});
-      
         basla();
-          // this.setState({
-          //   AktifKul : baba.data[0].name,
-          //   Pass : baba.data[0].pass
-          // });
       
-      
-      }
+    }
+
     PasKon =(e)=>{
-       
-       
-        //console.log(this.state.buton);
-       if (e.target.value === "") 
-       this.setState({
-        buton : true
-    });
-        else
+
+    if (e.target.value === "") 
+        this.setState({
+          buton : true
+         });
+     else
         this.setState({
             buton : false
         });
@@ -46,7 +38,9 @@ import axios from 'axios';
 
 
     render() {
-         const Kon = this.props.Kon;
+
+        const Kon = this.props.Kon;
+
         return(
             <Talep>
                 {
@@ -59,6 +53,7 @@ import axios from 'axios';
             <div>
             <h5>LIST :</h5>
             </div>
+
             <ul className="list-group">
             {  
               desc.map( adam =>{
@@ -70,20 +65,20 @@ import axios from 'axios';
                       )
               })
             }
-          
-         
-
-
-
+  
             </ul>
+
             <h5>ADD DESCRIPTION :</h5>
             <div className="row">
+
             <div className="col">
             <input className="form-control" id ="NewDesc" onChange= {this.PasKon}></input>
             </div>
+
             <div className="col">
             <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.KulEkle.bind(this, basla)}>ADD</button>
             </div>
+            
             </div>
             
             </div>

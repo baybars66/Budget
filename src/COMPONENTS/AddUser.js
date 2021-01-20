@@ -37,6 +37,7 @@ import axios from 'axios';
         basla();
         
     }
+    
     NameKon =(e)=>{
         //console.log(this.state.buton);
         if (e.target.value === "") 

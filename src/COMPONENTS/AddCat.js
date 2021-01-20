@@ -20,20 +20,16 @@ import axios from 'axios';
     Sil = async (basla, e)=>{
         console.log(e.target.id);
         await axios.delete('http://88.250.131.163:10066/Cat/sil/' + e.target.id);
-    
         basla();
-         
-      
-      }
+     
+    }
+
     PasKon =(e)=>{
-       
-       
-        //console.log(this.state.buton);
-       if (e.target.value === "") 
+      if (e.target.value === "") 
        this.setState({
         buton : true
-    });
-        else
+       });
+       else
         this.setState({
             buton : false
         });
@@ -47,14 +43,15 @@ import axios from 'axios';
                 {
                     value => {
                     const {cat,basla} = value;
-                  
-                    
+        
         return (
             <div className= {Kon ? "d-block"   : "d-none "}>
             <div>
             <h5>LIST :</h5>
             </div>
+            
             <ul className="list-group">
+
             {  
               cat.map( adam =>{
                return( 
@@ -66,16 +63,16 @@ import axios from 'axios';
               })
             }
           
-         
-
-
-
+     
             </ul>
             <h5>ADD CATEGORY :</h5>
+
             <div className="row">
+
             <div className="col">
             <input className="form-control" id ="NewCat" onChange= {this.PasKon}></input>
             </div>
+
             <div className="col">
             <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.KulEkle.bind(this, basla)}>ADD</button>
             </div>

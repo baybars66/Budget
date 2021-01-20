@@ -20,6 +20,7 @@ import axios from 'axios';
             Amount:""
         }],
     }
+    
 Work =async()=>{
     if(this.state.SwitchKon==="YES")
      await this.setState({

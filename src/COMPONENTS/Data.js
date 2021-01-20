@@ -42,12 +42,8 @@ onChange = (e) => {
     if (e[1] != null) iki =e[1].toLocaleDateString();
        //console.log(bir, iki);
         this.setState({
-
-           
-
             startDate: e[0],
             endDate : e[1],
-
             bilgi: {
                 ...this.state.bilgi,
                 gidis: bir,
@@ -57,12 +53,12 @@ onChange = (e) => {
 }
       
 Ekle = async (AktifKul, e)=> {
-
     this.setState({
         butonyazi: "RUNING",
         butonrengi: "btn btn-danger",
 
     });  
+
     var est = "";
     if (this.state.estimate) est="YES"; else est ="NO";
     await this.setState({
@@ -77,6 +73,7 @@ Ekle = async (AktifKul, e)=> {
             tahmini: est,
         }
     });
+
     const {ulke, kullanici, donus, icerik, kategory, adet, fiyat} = this.state.bilgi;
     if ((kullanici ==="" || donus ==="" ||  ulke ==="" ||  icerik ==="" ||  kategory ==="" ||  adet ==="" ||  fiyat ==="") ) console.log("boş");     
         else
@@ -98,7 +95,7 @@ Ekle = async (AktifKul, e)=> {
           console.log(err);
 
       });
-         //basla();
+        
       
 }
 

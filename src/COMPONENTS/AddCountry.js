@@ -21,20 +21,17 @@ import axios from 'axios';
         console.log(e.target.id);
         await axios.delete('http://88.250.131.163:10066/Country/sil/' + e.target.id);
        // dispatch({type:"AktifKul", payload:AktifKul});
-      
         basla();
-         
-      
-      }
+           
+    }
+
     PasKon =(e)=>{
-       
-       
-        //console.log(this.state.buton);
-       if (e.target.value === "") 
+    
+     if (e.target.value === "") 
        this.setState({
         buton : true
-    });
-        else
+     });
+      else
         this.setState({
             buton : false
         });
@@ -55,6 +52,7 @@ import axios from 'axios';
             <div>
             <h5>LIST :</h5>
             </div>
+
             <ul className="list-group">
             
             {  
@@ -68,21 +66,23 @@ import axios from 'axios';
               })
             }
           
-         
-
-
-
+ 
+ 
             </ul>
             <div></div>
             <h5>ADD COUNTRY :</h5>
+
             <div className="row">
+
             <div className="col">
             <input className="form-control"  id ="NewCount" onChange= {this.PasKon}></input>
             </div>
+
             <div className="col">
             <button className="btn btn-primary" disabled= {this.state.buton} onClick ={this.KulEkle.bind(this, basla)}>ADD</button>
             
             </div>
+            
             </div>
             </div>
         )

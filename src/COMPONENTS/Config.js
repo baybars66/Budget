@@ -9,28 +9,20 @@ import AddCountry from './AddCountry';
  class Config extends Component {
 
     state = {
-        user: [{
-            id : "",
-            name :""
-        }
-        ],
+        user: [{id : "", name :"" }],
+
         AddUserKon: false,
         AddCatKon : false,
         AddDescKon: false,
         AddCounKon:false,
-        
-
-        
-
+    
     }
 
 
 Getir = (dispatch, e) =>{
-      const is =e.target.value;
-      
-
-      switch (is){
-        case "USER": 
+    const is =e.target.value;
+    switch (is){
+      case "USER": 
         this.setState({
           AddUserKon: true,
           AddCatKon : false,
@@ -38,28 +30,25 @@ Getir = (dispatch, e) =>{
           AddCounKon:false,
           
         });
-        break;
-        case "DESCRIPTION": 
+      break;
+      case "DESCRIPTION": 
         dispatch({type:"AddDescPageOpen", payload:true});
         this.setState({
           AddUserKon: false,
-        AddCatKon : false,
-        AddDescKon: true,
-        AddCounKon:false,
-        
+          AddCatKon : false,
+          AddDescKon: true,
+          AddCounKon:false,
         });
-        break;
-        case "CATEGORY": 
+      break;
+      case "CATEGORY": 
         this.setState({
           AddUserKon: false,
           AddCatKon : true,
           AddDescKon: false,
           AddCounKon:false,
-          
         });
-        break;
-
-        case "COUNTRY": 
+      break;
+      case "COUNTRY": 
         this.setState({
           AddUserKon: false,
           AddCatKon : false,
@@ -67,9 +56,8 @@ Getir = (dispatch, e) =>{
           AddCounKon: true,
           
         });
-        break;
-        case "": 
-        console.log("bu");
+      break;
+      case "": 
         this.setState({
           AddUserKon: false,
           AddCatKon : false,
@@ -77,9 +65,8 @@ Getir = (dispatch, e) =>{
           AddCounKon:false,
           
         });
-        break;
-
-        default :
+      break;
+      default :
         this.setState({
           AddUserKon: false,
           AddCatKon : false,
@@ -89,20 +76,20 @@ Getir = (dispatch, e) =>{
         });
           // console.log(this.state.Con);
 
-        }
-
     }
 
+  }
 
-    render() {
+
+  render() {
        const {AddCounKon, AddCatKon, AddDescKon, AddUserKon}= this.state;
+
          return(
         <Talep>
             {
                 value => {
                 const {ConfigKon, dispatch} = value;
-               
-               // console.log(Con);
+            
            return (
          
             <div className= {ConfigKon ? "d-block container-fluid"  : "d-none container-fluid"} >
@@ -128,23 +115,14 @@ Getir = (dispatch, e) =>{
             <AddDesc Kon={AddDescKon} />
             <AddCat Kon={AddCatKon} />
             <AddCountry Kon={AddCounKon} />
-            
-
-            
-
-
+      
             </div>
-            
-
-
-
             </div>
 
             </form>
            
           </div>
           </div>
-        
           
           )}
       }
@@ -156,4 +134,3 @@ Getir = (dispatch, e) =>{
 
 export default Config;
 
-//onChange={this.Getir.bind(kisiler)}
