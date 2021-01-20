@@ -6,7 +6,7 @@ import axios from 'axios';
 
     state = {
         buton : true,
-        SwitchKon : "NO", 
+        SwitchKon : "YES", 
         ulke:"",
         AnaData: [{
             id:"",
@@ -20,18 +20,19 @@ import axios from 'axios';
             Amount:""
         }],
     }
-Work =()=>{
+Work =async()=>{
     if(this.state.SwitchKon==="YES")
-     this.setState({
+     await this.setState({
             SwitchKon: "NO"
 
      });
       else 
       
-      this.setState({
+     await this.setState({
              SwitchKon: "YES"
  
       });
+      this.Goster();
 }
 
 Degis = async (e)=>{
@@ -50,7 +51,7 @@ Goster = async() =>{
       estimate: this.state.SwitchKon
     }
   //console.log(istek);
-  await axios.post('http://localhost:5006/GetData/', istek)
+  await axios.post('http://88.250.131.163:10066/GetData/', istek)
     .then ( (response)=>{
            // console.log(response.data);
             this.setState({
@@ -67,7 +68,7 @@ Sil = async (e)=>{
             ulke: ulke
         };
        console.log(silinecek);
-        await axios.post('http://localhost:5006/Data/sil/', silinecek)
+        await axios.post('http://88.250.131.163:10066/Data/sil/', silinecek)
         .then ( (response)=>{
              console.log(response.data);
              this.Goster();

@@ -147,15 +147,26 @@ export class Arz extends Component {
         ShowDataKon: false,
 
         basla : async () =>{
-                const adamlar = await axios.get("http://localhost:5006/kisiler");
-                const ulkeler = await axios.get("http://localhost:5006/Country");
-                const cats = await axios.get("http://localhost:5006/Cat"); 
-                const descs = await axios.get("http://localhost:5006/Desc"); 
-                this.setState({
+            console.log("burda");
+               const adamlar = await axios.get("http://88.250.131.163:10066/kisiler");
+             // const adamlar = await axios.get("http://localhost:5006/kisiler");
+              // const adamlar = await axios.get("http://127.0.0.1:5006/kisiler");
+                // .then(resp=>{
+                //     console.log(resp);
+                // })
+                // .catch(err =>{
+                //     console.error(err);
+                // });
+
+
+                 const ulkeler = await axios.get("http://88.250.131.163:10066/Country");
+                 const cats = await axios.get("http://88.250.131.163:10066/Cat"); 
+                 const descs = await axios.get("http://88.250.131.163:10066/Desc"); 
+                 this.setState({
                   kisiler : adamlar.data,
-                  country : ulkeler.data,
-                  cat : cats.data,
-                  desc : descs.data
+                   country : ulkeler.data,
+                   cat : cats.data,
+                   desc : descs.data
                 });
         },
 
@@ -172,16 +183,16 @@ export class Arz extends Component {
          }
 
 
-    basla = async () =>{
-        //  console.log('ilk mi');
-        // const {dispatch}=this.props;
-        const adamlar = await axios.get("http://localhost:5006/kisiler");
-        // console.log(adamlar.data);
-        this.setState({
-           kisiler : adamlar.data
+    // basla = async () =>{
+    //     //  console.log('ilk mi');
+    //     // const {dispatch}=this.props;
+    //     const adamlar = await axios.get("http://88.250.131.163:5006/kisiler");
+    //     // console.log(adamlar.data);
+    //     this.setState({
+    //        kisiler : adamlar.data
 
-             });
-            }
+    //          });
+    //         }
 
     render() {
         return (
