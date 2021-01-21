@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Talep from './context';
 import axios from 'axios';
+import Sum from './Sum';
 
  class ShowData extends Component {
 
     state = {
-        buton : true,
+        dugme : false,
+        SumKon: false,
         SwitchKon : "YES", 
         ulke:"",
         AnaData: [{
@@ -54,10 +56,21 @@ Goster = async() =>{
   //console.log(istek);
   await axios.post('http://88.250.131.163:10066/GetData/', istek)
     .then ( (response)=>{
+             
            // console.log(response.data);
             this.setState({
-                AnaData : response.data
+                AnaData : response.data,
+                dugme: true,
+
             });
+    });
+}
+
+SumOpen= ()=>{
+    this.setState({
+        SumKon : !this.state.SumKon
+
+
     });
 }
 
@@ -73,61 +86,63 @@ Sil = async (e)=>{
         .then ( (response)=>{
              console.log(response.data);
              this.Goster();
-            //  this.setState({
-            //      AnaData : response.data
+     
+        });
  
- 
-            //  });
+}
 
-       
- 
-       });
- 
-       // basla();
-         
-      
-      }
-    // PasKon =(e)=>{
-       
-       
-    //     //console.log(this.state.buton);
-    //    if (e.target.value === "") 
-    //    this.setState({
-    //     buton : true
-    // });
-    //     else
-    //     this.setState({
-    //         buton : false
-    //     });
-    // }
-
+  
 
     render() {
-     const {AnaData, SwitchKon} = this.state;
+     const {AnaData, SwitchKon, dugme, SumKon} = this.state;
         return(
             <Talep>
                 {
                     value => {
-                    const {country,ShowDataKon} = value;
-                  
-                    
+                    const {ShowDataKon, country} = value;
+                    const resimyolu = "/pictures/Flags/" + this.state.ulke + ".jpg";
+                                     
         return (
+
             <div className= {ShowDataKon ? "d-block"   : "d-none "}>
             
+         
           
             <div className="row ">
-
-            <div className="col">{ SwitchKon==="YES" ? "Estimate" : "Realized"}
-                <div></div>
+            <div className="col-4">
+                
+            <img className="rounded float-left"
+                    src={ resimyolu } alt={this.state.ulke}  ></img>
+                      
+            </div>    
+            <div className="col-2d-flex justify-content-end">
+            
+            <div className= {dugme ? "d-block"   : "d-none "}>
+            <button className="btn btn-sm btn-primary mt-3" onClick ={this.SumOpen}>SUM</button>
+            </div>
+            </div>
+            <div className="col-2 d-flex justify-content-end">
+            <div></div>
+            
+                <div>{ SwitchKon==="YES" ? "Estimate" : "Realized"}
+                
+                <div>
+             
+                </div>
+             
+           
                     <label  className="switch">
                     <input id="sel2" type="checkbox" onChange={this.Work}></input>
                     <span className="slider round"></span>
-                    </label>
-                    </div>
+                  
 
+                    </label>
+                    
+                    </div>
+                    </div>
             <div className="col">
             <label htmlFor="ulkeler">Select list:</label>
-            <select className="form-control" id="ulkeler" onChange = {this.Degis}  >   
+            <select className="form-control form-control-sm" id="ulkeler" onChange = {this.Degis}  >   
             <option></option>
             {  
               country.map( adam =>{
@@ -139,9 +154,12 @@ Sil = async (e)=>{
             </select>
 
             </div>
-          
+          <div>
+
+          <Sum SumKon={SumKon}/>
+          </div>
             <div>
-            <h5>List:</h5>
+          
             <table className="table table-striped">
             <thead>
             <tr>

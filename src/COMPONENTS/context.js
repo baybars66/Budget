@@ -118,9 +118,9 @@ export class Arz extends Component {
 
         AktifKul : "NoConn",
 
-        LoginKon : true,
+        LoginKon : false,
 
-        MainKon : false,
+        MainKon : true,
 
         DataKon: false,
 
@@ -128,7 +128,7 @@ export class Arz extends Component {
 
         ConfigKon: false,
 
-        ShowDataKon: false,
+        ShowDataKon: true,
 
         basla : async () =>{
             console.log("burda");

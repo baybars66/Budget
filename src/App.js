@@ -10,6 +10,7 @@ import ShowDataPage from './COMPONENTS/ShowDataPage';
 
 
 
+
 import './App.css';
 
 class App extends Component {
@@ -26,7 +27,9 @@ class App extends Component {
 
 
  <Data />
+
 <ShowDataPage />
+
  <Imza />
     </div>
    );

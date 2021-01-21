@@ -14,19 +14,18 @@ class Main extends Component {
        
         return(
             <Talep>
-                {  // className="rounded float.right" alt="Cinque Terre"
+                {  
                  value => {
                         const {MainKon,AktifKul,dispatch} = value;
-                        <div>
-                        <button type="submit" className="btn btn-primary" >Log In</button>
-                        </div>
+                        // <div>
+                        // <button type="submit" className="btn btn-primary" >Log In</button>
+                        // </div>
                         const resimyolu = "/pictures/" + AktifKul + ".jpg";
-                    // const {kisiler} =value;
-                    // const isim = kisiler[0].name;//****************** */
-                    //console.log(isim);
+                   
                        
                     return (
                     <div className={MainKon ? "d-block" : "d-none"}>
+                   
                     <div className="container p-1 my-2 bg-dark text-white">
                     <div className="d-flex justify-content-between">
                    
@@ -38,6 +37,7 @@ class Main extends Component {
                         </div>
                    
                     </div>
+                    
                     </div>
 
                   
