@@ -120,7 +120,7 @@ export class Arz extends Component {
 
         LoginKon : false,
 
-        MainKon : true,
+        MainKon : false,
 
         DataKon: false,
 

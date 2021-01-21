@@ -1,13 +1,37 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
  class Sum extends Component {
 
+       state = {
+        kur:"",
+        GiderEU:"1460",
+        GiderTL:"",
+
+       }
+    
+
+    componentDidMount = async ()=>{
+      console.log("acıldı");
+        const paralar = await axios.get("https://api.exchangeratesapi.io/latest");
+        console.log(paralar.data.rates.TRY);
+
+      this.setState({
+          
+          GiderTL: this.state.GiderEU * paralar.data.rates.TRY
+
+      });
+     
+     
+      }
+  
 
     render() {
 
         const SumKon = this.props.SumKon;
+        const{GiderEU, GiderTL} = this.state;
        
- 
+
 
         return (
             <div className={SumKon? "d-block container"  : "d-none container"} >
@@ -25,7 +49,7 @@ import React, { Component } from 'react';
                 <div className="form-row ">
                         <div className="form-group col">
                          <p className="text-center text-white bg-secondary rounded">Total Budget</p>
-                         <p className="text-center text-white bg-secondary rounded ">1460 €</p>
+                         <p className="text-center text-white bg-secondary rounded" data-toggle="tooltip" data-placement="right" title={GiderTL}>{GiderEU} €</p>
                         </div>
 
                          <div className="form-group col">
