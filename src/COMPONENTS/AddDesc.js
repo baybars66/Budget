@@ -11,14 +11,14 @@ import axios from 'axios';
         e.preventDefault();
         const kul = document.getElementById("NewDesc").value;
         console.log("tıkladım");
-        await axios.post('http://88.250.131.163:10066/Desc/Add/' + kul);
+        await axios.post('http://localhost:10066/Desc/Add/' + kul);
         basla();
      
     }
 
     Sil = async (basla, e)=>{
         console.log(e.target.id);
-        await axios.delete('http://88.250.131.163:10066/Desc/sil/' + e.target.id);
+        await axios.delete('http://localhost:10066/Desc/sil/' + e.target.id);
        // dispatch({type:"AktifKul", payload:AktifKul});
         basla();
       
