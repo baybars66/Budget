@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import Talep from './context';
 import axios from 'axios';
 import Sum from './Sum';
+import { isThisQuarter } from 'date-fns';
 
  class ShowData extends Component {
 
     state = {
         
-        EstSumAmount:"",
-        RelSumAmount:"",
+        EstSum:"",
+        RealSum:"",
         dugme : false,
         SumKon: false,
         SwitchKon : "YES", 
@@ -38,13 +39,16 @@ Work =async()=>{
              SwitchKon: "YES"
  
       });
+
       this.Goster();
 }
+
 
 Degis = async (e)=>{
    await this.setState({
         ulke: e.target.value,
-        SumKon :false
+        SumKon :false,
+        dugme: true
         
     })
     
@@ -71,26 +75,30 @@ Goster = async() =>{
     });
 }
 
-SumOpen= async()=>{
+SumOpen= async ()=>{
+
     const ulke = {
         name :this.state.ulke,
         est: this.state.SwitchKon
+
     }
-  
-    const EstSum= await axios.post('http://localhost:10066/SUM1/', ulke);
-    console.log(EstSum);
-    // const tahminibutce = Object.values(EstSum.data[0]);
-    // const RelSum= await axios.post('http://localhost:10066/SUM2/', ulke);
-    // const harcananpara = Object.values(RelSum.data[0]);
+
+
+    const EstSum= await axios.post('http://localhost:10066/ESTSUM/', ulke);
+    const v1 =EstSum.data[0].Sum;
+    const RealSum =await axios.post('http://localhost:10066/REALSUM/', ulke);
+    const v2 =RealSum.data[0].Sum;
+
+    console.log('buuuuu', this.state.EstSum);
+
+    this.setState({
+        EstSum : v1,
+        RealSum : v2,
+        SumKon: !this.state.SumKon,
+
+    });
     
-  
-    // this.setState({
-    //     SumKon : !this.state.SumKon,
-    //     EstSumAmount : tahminibutce,
-    //     RelSumAmount: harcananpara
 
-
-    // });
 }
 
 
@@ -116,11 +124,10 @@ Sil = async (e)=>{
      const {AnaData, SwitchKon, dugme} = this.state;
      const SumData = {
             SumKon:this.state.SumKon,
-            EstSumAmount: this.state.EstSumAmount,
-            RelSumAmount: this.state.RelSumAmount,
-
+            EstSum: this.state.EstSum,
+            RealSum: this.state.RealSum,
             ulke: this.state.ulke
-     }
+        }
         return(
             <Talep>
                 {
@@ -181,6 +188,11 @@ Sil = async (e)=>{
 
             </div>
           <div>
+
+
+
+
+
 
           <Sum  SumData={SumData}/>
           </div>

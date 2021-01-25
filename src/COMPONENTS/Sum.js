@@ -30,9 +30,9 @@ import React, { Component } from 'react';
 
     render() {
 
-        const {SumKon, EstSumAmount, ulke, RelSumAmount}= this.props.SumData;
+        const {SumKon, EstSum, RealSum, ulke}= this.props.SumData;
         const{GiderEU, GiderTL} = this.state;
-       
+       console.log(EstSum);
 
 
         return (
@@ -51,17 +51,17 @@ import React, { Component } from 'react';
                 <div className="form-row ">
                         <div className="form-group col">
                          <p className="text-center text-white bg-secondary rounded">Total Budget</p>
-                         <p className="text-center text-white bg-secondary rounded" data-toggle="tooltip" data-placement="right" title={GiderTL}>{EstSumAmount} €</p>
+                         <p className="text-center text-white bg-secondary rounded" data-toggle="tooltip" data-placement="right" title={GiderTL}>{EstSum} €</p>
                         </div>
 
                          <div className="form-group col">
                          <p className="text-center text-white bg-secondary rounded ">Total Expenses</p>
-                         <p className="text-center text-white bg-secondary rounded ">{RelSumAmount} €</p>
+                         <p className="text-center text-white bg-secondary rounded ">{RealSum} €</p>
                          </div>
 
                          <div className="form-group col">
                          <p className="text-center text-white bg-secondary rounded">Difference</p>
-                         <p className="text-center text-white bg-secondary rounded ">{EstSumAmount-RelSumAmount} €</p>
+                         <p className="text-center text-white bg-secondary rounded ">{EstSum-RealSum} €</p>
                          </div>
                 </div>
                 </div>
