@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import DatePicker, { registerLocale }  from "react-datepicker";
 import axios from 'axios';
 import Talep from './context';
-//import axios from 'axios';
+
 import tr from "date-fns/locale/tr"; // the locale you want
 import "react-datepicker/dist/react-datepicker.css";
  

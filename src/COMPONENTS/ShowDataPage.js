@@ -2,14 +2,19 @@ import React, { Component } from 'react'
 import Talep from './context';
 import axios from 'axios';
 import Sum from './Sum';
-import { isThisQuarter } from 'date-fns';
+//import { isThisQuarter } from 'date-fns';
 
  class ShowData extends Component {
 
     state = {
-        
-        EstSum:"",
-        RealSum:"",
+        EstTotal:"",
+        RealTotal:"",
+
+        Trans:"",
+        Lodging:"",
+        Food:"",
+        Other:"",
+
         dugme : false,
         SumKon: false,
         SwitchKon : "YES", 
@@ -30,13 +35,15 @@ import { isThisQuarter } from 'date-fns';
 Work =async()=>{
     if(this.state.SwitchKon==="YES")
      await this.setState({
-            SwitchKon: "NO"
+            SwitchKon: "NO",
+            SumKon :false,
 
      });
       else 
       
      await this.setState({
-             SwitchKon: "YES"
+             SwitchKon: "YES",
+             SumKon :false,
  
       });
 
@@ -45,14 +52,17 @@ Work =async()=>{
 
 
 Degis = async (e)=>{
+    if (e.target.value !=="") {
    await this.setState({
         ulke: e.target.value,
         SumKon :false,
         dugme: true
         
-    })
+    });
     
     this.Goster();
+
+}
 
 }
 
@@ -63,7 +73,7 @@ Goster = async() =>{
       estimate: this.state.SwitchKon
     }
   //console.log(istek);
-  await axios.post('http://localhost:10066/GetData/', istek)
+  await axios.post('http://88.250.131.163:10066/GetData/', istek)
     .then ( (response)=>{
              
            // console.log(response.data);
@@ -73,31 +83,46 @@ Goster = async() =>{
 
             });
     });
+
+    await axios.post('http://88.250.131.163:10066/SUM/', istek)
+    .then ( (response)=>{
+             
+        // console.log(response.data);
+         this.setState({
+             EstTotal : response.data.EstTotal,
+             RealTotal: response.data.RealTotal,
+
+         });
+ });
+
+
 }
 
 SumOpen= async ()=>{
 
-    const ulke = {
+    const bilgi = {
         name :this.state.ulke,
         est: this.state.SwitchKon
 
     }
+    console.log(bilgi);
+   const SumReq =await axios.post('http://localhost:10066/DetailSum/', bilgi);
+    //const v2 =RealSum.data[0].Sum;
+  console.log(SumReq.data);
+  
+  console.log(SumReq.data.SumFood);
+   
+   await this.setState({
+        Trans : SumReq.data.SumTrans,
+        Lodging : SumReq.data.SumLodging,
+        Food : SumReq.data.SumFood,
+        Other : SumReq.data.SumOther,
 
-
-    const EstSum= await axios.post('http://localhost:10066/ESTSUM/', ulke);
-    const v1 =EstSum.data[0].Sum;
-    const RealSum =await axios.post('http://localhost:10066/REALSUM/', ulke);
-    const v2 =RealSum.data[0].Sum;
-
-    console.log('buuuuu', this.state.EstSum);
-
-    this.setState({
-        EstSum : v1,
-        RealSum : v2,
         SumKon: !this.state.SumKon,
 
     });
     
+     
 
 }
 
@@ -124,10 +149,16 @@ Sil = async (e)=>{
      const {AnaData, SwitchKon, dugme} = this.state;
      const SumData = {
             SumKon:this.state.SumKon,
-            EstSum: this.state.EstSum,
-            RealSum: this.state.RealSum,
-            ulke: this.state.ulke
+            ulke: this.state.ulke,
+            Trans: this.state.Trans,
+            Lodging:this.state.Lodging,
+            Food: this.state.Food,
+            Other: this.state.Other,
+            EstTotal:this.state.EstTotal,
+            RealTotal: this.state.RealTotal,
         }
+
+        console.log(SumData);
         return(
             <Talep>
                 {

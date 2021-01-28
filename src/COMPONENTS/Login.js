@@ -59,7 +59,7 @@ class Login extends Component {
   Gir = async (e)=> {   
     // const deger = (e.target.value);
     // const baba = await axios.get('http://localhost:5006/kisiler/' + deger);
-    const baba = await axios.get('http://localhost:10066/kisiler/' + e.target.value);
+    const baba = await axios.get('http://88.250.131.163:10066/kisiler/' + e.target.value);
     // console.log(deger);
     //console.log(baba.data);
     // console.log(baba.data[0].name);

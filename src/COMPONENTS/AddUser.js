@@ -26,14 +26,14 @@ import axios from 'axios';
 
            }
         });
-        await axios.post('http://localhost:10066/Kull/Add', this.state.yenikul);
+        await axios.post('http://l88.250.131.163:10066/Kull/Add', this.state.yenikul);
         basla();
      
     }
 
     Sil = async (basla, e)=>{
         console.log(e.target.id);
-        await axios.delete('http://localhost:10066/kisiler/sil/' + e.target.id);
+        await axios.delete('http://88.250.131.163:10066/kisiler/sil/' + e.target.id);
         basla();
         
     }

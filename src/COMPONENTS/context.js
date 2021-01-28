@@ -118,7 +118,7 @@ export class Arz extends Component {
 
         AktifKul : "NoConn",
 
-        LoginKon : true,
+        LoginKon : false,
 
         MainKon : false,
 
@@ -128,27 +128,30 @@ export class Arz extends Component {
 
         ConfigKon: false,
 
-        ShowDataKon: false,
+        ShowDataKon: true,
 
         basla : async () =>{
-            console.log("burda");
-             //  const adamlar = await axios.get("http://88.250.131.163:10066/kisiler");
-             const adamlar = await axios.get("http://localhost:10066/kisiler");
-                // .then(resp=>{
-                //     console.log(resp);
-                // })
-                // .catch(err =>{
-                //     console.error(err);
-                // });
-              const ulkeler = await axios.get("http://localhost:10066/Country");
-               const cats = await axios.get("http://localhost:10066/Cat"); 
-               const descs = await axios.get("http://localhost:10066/Desc"); 
-                this.setState({
-                   kisiler : adamlar.data,
-                   country : ulkeler.data,
-                   cat : cats.data,
-                   desc : descs.data
-                });
+            console.log("baslıyooor");
+            const Init = await axios.get("http://88.250.131.163:10066/Basla");
+            //console.log(Init);
+            //   const adamlar = await axios.get("http://88.250.131.163:10066/kisiler");
+            //  //const adamlar = await axios.get("http://localhost:10066/kisiler");
+            //     // .then(resp=>{
+            //     //     console.log(resp);
+            //     // })
+            //     // .catch(err =>{
+            //     //     console.error(err);
+            //     // });
+            //   const ulkeler = await axios.get("http://88.250.131.163:10066/Country");
+            //    const cats = await axios.get("http://88.250.131.163:10066/Cat"); 
+            //    const descs = await axios.get("http://88.250.131.163:10066/Desc"); 
+                 this.setState({
+                    kisiler : Init.data.kisiler,
+                    country : Init.data.country,
+                    cat : Init.data.cat,
+                    desc : Init.data.desc
+                 });
+               // console.log(Init.data.kisiler);
         },
 
         
