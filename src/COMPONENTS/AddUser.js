@@ -26,7 +26,8 @@ import axios from 'axios';
 
            }
         });
-        await axios.post('http://l88.250.131.163:10066/Kull/Add', this.state.yenikul);
+        //console.log(this.state.yenikul);
+        await axios.post('http://88.250.131.163:10066/Kull/Add/', this.state.yenikul);
         basla();
      
     }

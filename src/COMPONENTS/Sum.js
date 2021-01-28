@@ -30,8 +30,13 @@ import React, { Component } from 'react';
 
     render() {
 
-        const {SumKon,ulke,EstTotal,RealTotal,Trans,Lodging,Other,Food}= this.props.SumData;
+        var {SumKon,ulke,EstTotal,RealTotal,Trans,Lodging,Other,Food}= this.props.SumData;
         //const{GiderEU, GiderTL} = this.state;
+         if(Trans === null) Trans=0;
+         if(Lodging === null) Lodging=0;
+         if(Food === null) Food=0;
+         if(Other === null) Other=0;
+         // else console.log(Trans);
        const Total = Trans +Lodging+Other+Food;
        console.log(Total);
        const YuzdeTrans = Math.round(Trans/Total*100);

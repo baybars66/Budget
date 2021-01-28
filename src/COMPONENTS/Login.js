@@ -57,13 +57,9 @@ class Login extends Component {
   }
  
   Gir = async (e)=> {   
-    // const deger = (e.target.value);
-    // const baba = await axios.get('http://localhost:5006/kisiler/' + deger);
+ 
     const baba = await axios.get('http://88.250.131.163:10066/kisiler/' + e.target.value);
-    // console.log(deger);
-    //console.log(baba.data);
-    // console.log(baba.data[0].name);
-    // console.log(baba.data[0].pass);
+  
     this.setState({
       AktifKul : baba.data[0].name,
       Pass : baba.data[0].pass
@@ -78,24 +74,6 @@ class Login extends Component {
    //dispatch({type:"AktifKul", payload:this.AktifKul});
   }
 
-  // SubKon = (e)=> { 
-  //  // e.preventDefault();
-  //   const Kon= this.state.ButonKon;
-  //   console.log("bu");
-  //   console.log(Kon);
-  //   Kon ? console.log(Kon)  : console.log(Kon)
-
-  // }
-  
-  componentDidMount = (e) =>{
-    //  console.log('login açıldı');
-    //  console.log(this.state.AktifKul);
-    }
-
- componentDidUpdate = (e)=>{
-   
-  //console.log('Update');
- }
 
 
   render() {
