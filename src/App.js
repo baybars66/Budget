@@ -8,33 +8,26 @@ import Config from './COMPONENTS/Config';
 import Imza from './COMPONENTS/Imza';
 import ShowDataPage from './COMPONENTS/ShowDataPage';
 
-
-
-
 import './App.css';
 
 class App extends Component {
-  
-  
   render() {
-    return (
-    <div className="container">
-<Login />
-<Main />
-<Anapanel />
+      return (
+        <div className="container">
 
-<Config />
+        <Login />
+        <Main />
+        <Anapanel />
+        <Config />
+        <Data />
+        <ShowDataPage />
+        <Imza />
 
-
- <Data />
-
-<ShowDataPage />
-
- <Imza />
-    </div>
-   );
+       </div>
+      );
   }
 }
+
 
 export default App;
 

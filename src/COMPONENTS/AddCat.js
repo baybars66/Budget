@@ -18,7 +18,7 @@ import axios from 'axios';
     }
 
     Sil = async (basla, e)=>{
-        console.log(e.target.id);
+        //console.log(e.target.id);
         await axios.delete('http://88.250.131.163:10066/Cat/sil/' + e.target.id);
         basla();
      

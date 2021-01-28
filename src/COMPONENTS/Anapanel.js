@@ -28,12 +28,7 @@ class Anapanel extends Component {
 
     }  
 
-    // ButtKon = (AktifKul, e) =>{
-    //     console.log(AktifKul);
-    //     if (AktifKul==="Suela") return (false);
-    //     else return(true);
 
-    // } 
 
 
     render() {
