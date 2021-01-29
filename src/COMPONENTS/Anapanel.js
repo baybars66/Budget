@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Talep from './context';
+import Axios from './Axios';
+
 
 
 class Anapanel extends Component {
@@ -15,7 +17,6 @@ class Anapanel extends Component {
 
     }   
     
-
     ToShowPage = (dispatch, e)=>{
         e.preventDefault();
         dispatch({type:"ShowPageOpen", payload:true});
@@ -28,8 +29,14 @@ class Anapanel extends Component {
 
     }  
 
+    Quarter1 = (dispatch, e)=>{
+        e.preventDefault();
+        console.log("Quarter1 Fonk");
+        const Q1 = await axios.get("http://88.250.131.163:10066/Q1");
 
+        console.log(Q1);
 
+    }  
 
     render() {
 
@@ -39,7 +46,6 @@ class Anapanel extends Component {
                     value => {
                     const {AktifKul, PanelKon, dispatch} = value;
             
-
                  return (
                     <div className={PanelKon ? "d-block" : "d-none"}>
                     <div className="container-fluid p-1 my-3 bg-dark text-white">
@@ -73,7 +79,9 @@ class Anapanel extends Component {
                     className="btn btn-secondary btn-sm" onClick={this.toConfig.bind(this, dispatch)} >CONFIGRATION</button>
                     </div>
 
-                    
+                    <div className="col">
+                    <button type="submit" className="btn btn-secondary btn-sm" onClick={this.Quarter1.bind(this, dispatch)}>Quarter 1</button>
+                    </div>
                     
             
                     </div>

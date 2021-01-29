@@ -118,13 +118,13 @@ export class Arz extends Component {
 
         AktifKul : "NoConn",
 
-        LoginKon : true,
+        LoginKon : false,
 
         MainKon : false,
 
         DataKon: false,
 
-        PanelKon: false,
+        PanelKon: true,
 
         ConfigKon: false,
 
