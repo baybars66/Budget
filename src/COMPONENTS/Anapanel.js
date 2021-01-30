@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Talep from './context';
-import Axios from './Axios';
-
+import axios from 'axios';
 
 
 class Anapanel extends Component {
@@ -29,10 +28,10 @@ class Anapanel extends Component {
 
     }  
 
-    Quarter1 = (dispatch, e)=>{
+    Quarter1 = async (dispatch, e) =>{
         e.preventDefault();
         console.log("Quarter1 Fonk");
-        const Q1 = await axios.get("http://88.250.131.163:10066/Q1");
+        const Q1 = await axios.get("http://localhost:10066/Q1");
 
         console.log(Q1);
 
@@ -50,7 +49,6 @@ class Anapanel extends Component {
                     <div className={PanelKon ? "d-block" : "d-none"}>
                     <div className="container-fluid p-1 my-3 bg-dark text-white">
                     <h4 className="text-center">MAIN PANEL</h4>
-           
 
                     <div className="container-fluid">
                     <div className="jumbotron">
@@ -93,6 +91,7 @@ class Anapanel extends Component {
                     </div>
 
                     </div>
+
                     )
                 }
 

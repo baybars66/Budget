@@ -76,12 +76,13 @@ Goster = async() =>{
   await axios.post('http://88.250.131.163:10066/GetData/', istek)
     .then ( (response)=>{
              
-           // console.log(response.data);
+          // console.log(response.data);
             this.setState({
                 AnaData : response.data,
                 dugme: true,
 
             });
+            
     });
 
     await axios.post('http://88.250.131.163:10066/SUM/', istek)
@@ -95,7 +96,7 @@ Goster = async() =>{
          });
  });
 
-
+ 
 }
 
 SumOpen= async ()=>{
@@ -105,12 +106,12 @@ SumOpen= async ()=>{
         est: this.state.SwitchKon
 
     }
-    console.log(bilgi);
+   // console.log(bilgi);
    const SumReq =await axios.post('http://localhost:10066/DetailSum/', bilgi);
     //const v2 =RealSum.data[0].Sum;
-  console.log(SumReq.data);
+ // console.log(SumReq.data);
   
-  console.log(SumReq.data.SumFood);
+  //console.log(SumReq.data.SumFood);
    
    await this.setState({
         Trans : SumReq.data.SumTrans,
@@ -133,7 +134,7 @@ Sil = async (e)=>{
             id: e.target.id,
             ulke: ulke
         };
-       console.log(silinecek);
+      // console.log(silinecek);
         await axios.post('http://localhost:10066/Data/sil/', silinecek)
         .then ( (response)=>{
              console.log(response.data);
@@ -158,7 +159,7 @@ Sil = async (e)=>{
             RealTotal: this.state.RealTotal,
         }
 
-        console.log(SumData);
+
         return(
             <Talep>
                 {
@@ -253,9 +254,33 @@ Sil = async (e)=>{
                return( <tr key= {bilgi.id}>
                  
                 <th scope="row">{bilgi.User}</th> 
-                   
-                    <td> {bilgi.Depart} </td> 
-                    <td>  {bilgi.Donus}  </td> 
+               
+                    <td> 
+                        { ( () =>{
+                                var hadi = bilgi.Depart;
+                                var yil = hadi.substring(0,4);
+                                var ay = hadi.substring(5,7);
+                                var gun = hadi.substring(8,10);
+                                var zaman = gun+"." +ay +"."+ yil ;
+                               return (zaman);
+                        
+                             })()
+                        } 
+                    </td> 
+
+                    <td>  
+                        { ( () =>{
+                                var hadi = bilgi.Depart;
+                                var yil = hadi.substring(0,4);
+                                var ay = hadi.substring(5,7);
+                                var gun = hadi.substring(8,10);
+                                var zaman = gun+"." +ay +"."+ yil ;
+                               return (zaman);
+                        
+                             })()
+                        } 
+                    
+                    </td> 
                     <td> {bilgi.Descrip} </td> 
                     <td> {bilgi.Category} </td> 
                     <td> {bilgi.Quantity} </td> 

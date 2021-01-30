@@ -37,10 +37,13 @@ registerLocale("tr", tr); // register it with the name you want
      }
 
 onChange = (e) => {
-    var bir =e[0].toLocaleDateString();
+    ;
+   // console.log(e[0].toISOString().slice(0, 10));
+   // console.log(e[0].toLocaleDateString('en-US'));
+    var bir =e[0].toISOString().slice(0, 10);
     var iki ="";
-    if (e[1] != null) iki =e[1].toLocaleDateString();
-       //console.log(bir, iki);
+    if (e[1] != null) iki =e[1].toISOString().slice(0, 10);
+       console.log(bir, iki);
         this.setState({
             startDate: e[0],
             endDate : e[1],
@@ -189,7 +192,7 @@ render() {
                         startDate={startDate}
                         endDate={endDate}
                         selectsRange
-                        dateFormat="yyyy"
+                        dateFormat=""
                         inline
                      />
                     </div>
