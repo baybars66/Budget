@@ -7,6 +7,7 @@ import Anapanel from './COMPONENTS/Anapanel';
 import Config from './COMPONENTS/Config';
 import Imza from './COMPONENTS/Imza';
 import ShowDataPage from './COMPONENTS/ShowDataPage';
+import ShowQuarter from './COMPONENTS/ShowQuarterData';
 
 import './App.css';
 
@@ -18,7 +19,9 @@ class App extends Component {
         <Login />
         <Main />
         <Anapanel />
+
         <Config />
+        <ShowQuarter />
         <Data />
         <ShowDataPage />
         <Imza />

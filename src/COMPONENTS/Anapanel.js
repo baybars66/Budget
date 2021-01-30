@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Talep from './context';
-import axios from 'axios';
+
 
 
 class Anapanel extends Component {
@@ -28,12 +28,11 @@ class Anapanel extends Component {
 
     }  
 
-    Quarter1 = async (dispatch, e) =>{
+    ToQuarter = async (dispatch, e) =>{
         e.preventDefault();
-        console.log("Quarter1 Fonk");
-        const Q1 = await axios.get("http://localhost:10066/Q1");
-
-        console.log(Q1);
+        dispatch({type:"QuarterPageOpen", payload:true});
+      
+        
 
     }  
 
@@ -55,13 +54,15 @@ class Anapanel extends Component {
                     <form>
                     <div className="form-group">
                     <div className="row d-flex justify-content-around">
-
                     <div className="col">
-                    <button type="submit" className="btn btn-secondary btn-sm" onClick={this.ToShowPage.bind(this, dispatch)}>SHOW DATA PAGE</button>
+                    <button type="submit" className="btn btn-secondary btn-sm btn-block" onClick={this.ToQuarter.bind(this, dispatch)}>QUARTER</button>
+                    </div>
+                    <div className="col">
+                    <button type="submit" className="btn btn-secondary btn-sm btn-block" onClick={this.ToShowPage.bind(this, dispatch)}>SHOW DATA PAGE</button>
                     </div>
 
                     <div className="col">
-                    <button type="submit" className="btn btn-secondary btn-sm" onClick={this.BilgiGiris.bind(this, dispatch)}>ADD DATA PAGE</button>
+                    <button type="submit" className="btn btn-secondary btn-sm btn-block" onClick={this.BilgiGiris.bind(this, dispatch)}>ADD DATA PAGE</button>
                     </div>
                     <div className="col">
                     <button type="submit" disabled = 
@@ -74,12 +75,10 @@ class Anapanel extends Component {
                         }
                       })()}
                     
-                    className="btn btn-secondary btn-sm" onClick={this.toConfig.bind(this, dispatch)} >CONFIGRATION</button>
+                    className="btn btn-secondary btn-sm btn-block" onClick={this.toConfig.bind(this, dispatch)} >CONFIGRATION</button>
                     </div>
 
-                    <div className="col">
-                    <button type="submit" className="btn btn-secondary btn-sm" onClick={this.Quarter1.bind(this, dispatch)}>Quarter 1</button>
-                    </div>
+                   
                     
             
                     </div>

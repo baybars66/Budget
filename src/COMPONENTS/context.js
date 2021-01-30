@@ -25,6 +25,7 @@ const reducer = (state, action) => {
           DataKon: false,
           ConfigKon: false,
           ShowDataKon: false,
+          ShowQuarterKon: false,
         }
     case "AktifKul" : 
         return{
@@ -64,6 +65,16 @@ const reducer = (state, action) => {
            ShowDataKon : action.payload,
            PanelKon : false
         }
+    case "QuarterPageOpen" : 
+        // console.log('burada')
+        return{
+           ...state,
+           ShowQuarterKon : action.payload,
+           PanelKon : false
+        }
+
+
+        
     default: //console.log('değil')
         return state
 
@@ -129,6 +140,8 @@ export class Arz extends Component {
         ConfigKon: false,
 
         ShowDataKon: false,
+
+        ShowQuarterKon: false,
 
         basla : async () =>{
             console.log("baslıyooor");
