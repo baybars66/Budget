@@ -8,6 +8,7 @@ import Config from './COMPONENTS/Config';
 import Imza from './COMPONENTS/Imza';
 import ShowDataPage from './COMPONENTS/ShowDataPage';
 import ShowQuarter from './COMPONENTS/ShowQuarterData';
+import Grafik from './COMPONENTS/Grafik';
 
 import './App.css';
 
@@ -15,7 +16,7 @@ class App extends Component {
   render() {
       return (
         <div className="container">
-
+        
         <Login />
         <Main />
         <Anapanel />
