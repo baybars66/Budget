@@ -1,160 +1,166 @@
 import React, { Component } from 'react'
 import Talep from './context';
-import Grafik from './Grafik'
 import axios from 'axios';
+import ShowQuaDataDetail from './ShowQuaDetail';
 
-
-
-
-
-
- class ShowQuarterData extends Component {
+class ShowQuarterData extends Component {
 
     state ={
-        EstSum:"",
-        RealSum:"",
-        Trans: "",
-        Food: "",
-        Lodging: "",
-        Other:"",
 
+        AnahtarKonum:"YES",
+        Other:"",
+        Liste:[{}],
+        EST:"",
+        REAL:"",
+        peri:"Q1",
+        
 
     }
-
-
-
- Q1= async ()  =>{
- 
-      console.log("Quarter1 Fonk");
-      const q1 = await axios.get("http://localhost:10066/Q1");
-       this.setState({
-        EstSum:q1.data.Q1EstTotal,
-        RealSum:q1.data.Q1RealTotal,
-        Trans: q1.data.Q1Trans,
-        Food: q1.data.Q1Food,
-        Lodging: q1.data.Q1Lodging,
-        Other: q1.data.Q1Other,
-    });
-
-
- }
 
 
  componentDidMount=()=>{
- this.Q1();
- 
 
-
+ this.QL();
  }
- Q2= async ()  =>{
- 
-    const q1 = await axios.get("http://localhost:10066/Q2");
-     this.setState({
-      EstSum:q1.data.Q1EstTotal,
-      RealSum:q1.data.Q1RealTotal,
-      Trans: q1.data.Q1Trans,
-      Food: q1.data.Q1Food,
-      Lodging: q1.data.Q1Lodging,
-      Other: q1.data.Q1Other,
 
-     });
-
-}
-
-Q3= async ()  =>{
- 
-    const q1 = await axios.get("http://localhost:10066/Q3");
-     this.setState({
-      EstSum:q1.data.Q1EstTotal,
-      RealSum:q1.data.Q1RealTotal,
-      Trans: q1.data.Q1Trans,
-      Food: q1.data.Q1Food,
-      Lodging: q1.data.Q1Lodging,
-      Other: q1.data.Q1Other,
-
-     });
+Anahtar = async ()=>{
+    const {AnahtarKonum} = this.state;
+ if(AnahtarKonum==="YES") await this.setState({
+     AnahtarKonum: "NO"
     
+ });
+  else await this.setState({
+    AnahtarKonum: "YES"
+});
+
+this.QL();
+
+}
+
+Butt = async (e)  =>{
+    console.log(e.target.value);
+ await this.setState({
+ peri: e.target.value 
+
+ });
+
+await this.Totals();
+this.QL();
+
+}
+
+Totals = async() =>{
+    var wht = {
+        
+        peri: this.state.peri,
+
+    }
+    console.log(wht.peri);
+    await axios.post("http://localhost:10066/QT/", wht)
+    .then((response)=>{
+console.log(response.data);
+this.setState({
+
+    EST: response.data.est,
+    REAL: response.data.real,
+
+   });
+ 
+    })
+ 
+
 }
 
 
-
-Q4= async ()  =>{
+QL= async (e)  =>{
+    //console.log(this.state.AnahtarKonum);
     const ne = {
-        peri : "Quarter1"
-    }
-  await axios.post("http://localhost:10066/QL/", ne)
-   .then((response)=>{
 
-    console.log(response);
+        peri : this.state.peri,
+        Est: this.state.AnahtarKonum,
+    }
+    //console.log(ne);
+
+    await axios.post("http://localhost:10066/QL/", ne)
+        .then((response)=>{
+        //console.log(response.data);
+        var Toplam =0;
+        response.data.map(bilgi=>{ 
+        Toplam = Toplam + bilgi.gelen;
+        return true;/// illa koy diyo bana yoksa sarı hata veriyo
+     
+        })
+    this.setState({
+   
+        Liste: response.data,
+        Toplam:Toplam,
+  
+       });
+
+
+
+//  console.log("Liste buu ", this.state.Liste);
+
+//  console.log("Toplam buu ", this.state.Toplam);
 
    }
+ 
+);
 
-   );
+
+
     
-    // const q1 = await axios.get("http://localhost:10066/Q4");
-    //  this.setState({
-    //   EstSum:q1.data.Q1EstTotal,
-    //   RealSum:q1.data.Q1RealTotal,
-    //   Trans: q1.data.Q1Trans,
-    //   Food: q1.data.Q1Food,
-    //   Lodging: q1.data.Q1Lodging,
-    //   Other: q1.data.Q1Other,
-
-    //  });
+ 
 
 }
-//<Grafik width={50} height={50} data={data}/>
+
 
 
     render() {
-        //const {AnaData, SwitchKon, dugme} = this.state;
-        var {Trans,Lodging,Other,Food}= this.state;
-        //const{GiderEU, GiderTL} = this.state;
-         if(Trans === null) Trans=0;
-         if(Lodging === null) Lodging=0;
-         if(Food === null) Food=0;
-         if(Other === null) Other=0;
-         // else console.log(Trans);
-       const Total = Trans +Lodging+Other+Food;
-       console.log(Lodging);
-       const YuzdeTrans = Math.round(Trans/Total*100);
-       const YuzdeLodging = Math.round(Lodging/Total*100);
-       const YuzdeFood = Math.round(Food/Total*100);
-       const YuzdeOther = Math.round(Other/Total*100);
-        const data=[YuzdeTrans, YuzdeLodging, YuzdeFood, YuzdeOther];
-       
-       
-           return(
-               <Talep>
-                   {
-                       value => {
-                       const {ShowQuarterKon,desc} = value;
-                       const{EstSum, RealSum} = this.state;
-                  
-                                        
-           return (
+ 
+        const {Liste, Toplam} = this.state;
+        const bilgi= {
+            EstKon: this.state.AnahtarKonum,
+            Peri: this.state.peri,
+
+        }
+        return(
+            <Talep>
+                {
+                    value => {
+                    const {ShowQuarterKon} = value;
+                    const{EST, REAL} = this.state;
+
+                   
+            return (
    
-               <div className= {ShowQuarterKon ? "d-block"   : "d-none "}>
+            <div className= {ShowQuarterKon ? "d-block"   : "d-none "}>
                
  
              
                <div className="row d-flex justify-content-around">
               
                <div className="col ">
-               <button className="btn btn-sm btn-secondary mt-1 btn-block" onClick={this.Q1}>Q1</button>
+               <button className="btn btn-sm btn-secondary mt-1 btn-block" value= "Q1" onClick={this.Butt.bind(this)}>Q1</button>
                </div>
                <div className="col">
-               <button className="btn btn-sm btn-secondary mt-1  btn-block" onClick={this.Q2} >Q2</button>
+               <button className="btn btn-sm btn-secondary mt-1  btn-block" value= "Q2"  onClick={this.Butt.bind(this)} >Q2</button>
                </div>
                <div className="col">
-               <button className="btn btn-sm btn-secondary mt-1  btn-block" onClick={this.Q3}>Q3</button>
+               <button className="btn btn-sm btn-secondary mt-1  btn-block" value= "Q3"  onClick={this.Butt.bind(this)}>Q3</button>
                </div>
                <div className="col">
-               <button className="btn btn-sm btn-secondary mt-1 btn-block" onClick={this.Q4} >Q4</button>
+               <button className="btn btn-sm btn-secondary mt-1 btn-block" value= "Q4" onClick={this.Butt.bind(this)} >Q4</button>
                </div>
-               <div className="form-group col-5 border">
-               
-     </div>
+               <div className="form-group col-5 ">
+               <div className="col-2 mt-2 d-flex justify-content-end">
+                
+                <label  className="switch">
+                    <input id="sel2" type="checkbox" onClick={this.Anahtar}></input>
+                    <span className="slider round"></span>
+                </label>
+                </div>
+            </div>
 
                </div>
                <form>
@@ -169,18 +175,18 @@ Q4= async ()  =>{
 
                 <div className="form-row ">
                         <div className="form-group col">
-                         <p className="text-center text-white bg-secondary rounded">Total Budget</p>
-                         <p className="text-center text-white bg-secondary rounded" >{EstSum}</p>
+                        <p className="text-center text-white bg-secondary rounded">Total Budget</p>
+                        <p className="text-center text-white bg-secondary rounded" >{EST} €</p>
                         </div>
 
                          <div className="form-group col">
                          <p className="text-center text-white bg-secondary rounded ">Total Expenses</p>
-                         <p className="text-center text-white bg-secondary rounded ">{RealSum} €</p>
+                         <p className="text-center text-white bg-secondary rounded ">{REAL} €</p>
                          </div>
 
                          <div className="form-group col">
                          <p className="text-center text-white bg-secondary rounded">Difference</p>
-                         <p className="text-center text-white bg-secondary rounded ">{EstSum-RealSum}€</p>
+                         <p className="text-center text-white bg-secondary rounded ">{EST-REAL} €</p>
                          </div>
                 </div>
                 </div>
@@ -189,60 +195,72 @@ Q4= async ()  =>{
                     <div className="form-row ">
                     <div className="form-group-right col-6 border"> 
                     
-                    <div className="text-right"><span className="badge badge-secondary text-wrap" >Transportation</span></div>
-                    <div></div>
-                    <div className="text-right"><span className="badge badge-secondary text-wrap" >Lodging</span></div>
-                    <div></div>
-                    <div className="text-right"><span className="badge badge-secondary text-wrap" >Food</span></div>
-                    <div></div>
-                 
-                    <div className="text-right"><span className="badge  badge-secondary text-wrap" >Others</span></div>
-                    <div></div>
-                    </div>
-                   
+                {
+                    Liste.map (bilgi=>{
+                        return(
+                          <div className="text-right">
+                          <span className="badge badge-secondary text-wrap" >{bilgi.cat}</span>
+                          </div>
+                        )
 
-                    <div className="form-group col-2 "> 
+                    })
                 
-                    <div className="badge badge-primary text-wrap" >{Trans} €</div>
-                    <div className="badge badge-primary text-wrap" >{Lodging} €</div>
-                    <div className="badge badge-primary text-wrap" >{Food} €</div>
-                    <div className="badge badge-primary text-wrap" >{Other} €</div>
-                    </div>
+                }
 
+                </div>
 
-                    <div className="form-group-left  col-3 "> 
-<div className="badge badge-secondary text-wrap" >% {YuzdeTrans}</div>
-<div className="badge badge-secondary text-wrap" >% {YuzdeLodging}</div>
-<div className="badge badge-secondary text-wrap" >% {YuzdeFood}</div>
-<div className="badge badge-secondary text-wrap" >% {YuzdeOther}</div>
-</div> 
+                <div className="form-group col-2 border"> 
+                {
+     
+                   Liste.map (bilgi=>{
+                        return(
+                         <div className="text-right">
+                         <span className="badge badge-secondary text-wrap" >{bilgi.gelen}</span>
+                         </div>
+         
+                        )
 
+                    })
+                }
+                
+                </div>
 
-        
-                    </div>
+                <div className="form-group-left  col-3 "> 
+
+                {
+     
+                 Liste.map (bilgi=>{
+                     return(
+                     <div className="text-left">
+                     <span className="badge badge-primary text-wrap" >% {Math.round(bilgi.gelen/Toplam*100)}</span>
+                     </div>
+                     )   
+                  })
+                }
+                
+                </div>
+
+                </div>
                 </div>  
-            </div>  
+                </div>  
 
-            </form>
+                 </form>
 
+                 <ShowQuaDataDetail bilgi={bilgi}/>
+                 </div>
+                
 
-
-
-
-            </div>
-
-        )
+            )
    
-    }
-}
+         }
+        }
 
-</Talep>
-)
-}
+        </Talep>
+            )
+        }           
 }
 
 
 export default ShowQuarterData;
-
 
 

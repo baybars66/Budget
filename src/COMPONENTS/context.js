@@ -146,18 +146,7 @@ export class Arz extends Component {
         basla : async () =>{
             console.log("baslıyooor");
             const Init = await axios.get("http://localhost:10066/Basla");
-            //console.log(Init);
-            //   const adamlar = await axios.get("http://88.250.131.163:10066/kisiler");
-            //  //const adamlar = await axios.get("http://localhost:10066/kisiler");
-            //     // .then(resp=>{
-            //     //     console.log(resp);
-            //     // })
-            //     // .catch(err =>{
-            //     //     console.error(err);
-            //     // });
-            //   const ulkeler = await axios.get("http://88.250.131.163:10066/Country");
-            //    const cats = await axios.get("http://88.250.131.163:10066/Cat"); 
-            //    const descs = await axios.get("http://88.250.131.163:10066/Desc"); 
+       
                  this.setState({
                     kisiler : Init.data.kisiler,
                     country : Init.data.country,

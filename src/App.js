@@ -8,7 +8,7 @@ import Config from './COMPONENTS/Config';
 import Imza from './COMPONENTS/Imza';
 import ShowDataPage from './COMPONENTS/ShowDataPage';
 import ShowQuarter from './COMPONENTS/ShowQuarterData';
-import Grafik from './COMPONENTS/Grafik';
+
 
 import './App.css';
 
