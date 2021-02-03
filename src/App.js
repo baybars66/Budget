@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-import Main from './COMPONENTS/Main';
+import Main from './COMPONENTS/Baslik';
 import Login from './COMPONENTS/Login';
-import Data from './COMPONENTS/Data';
+import Data from './COMPONENTS/DATA/Data';
 import Anapanel from './COMPONENTS/Anapanel';
-import Config from './COMPONENTS/Config';
+import Config from './COMPONENTS/CONF/Config';
 import Imza from './COMPONENTS/Imza';
-import ShowDataPage from './COMPONENTS/ShowDataPage';
-import ShowQuarter from './COMPONENTS/ShowQuarterData';
+import ShowDataPage from './COMPONENTS/DATA/ShowDataPage';
+import ShowQuarter from './COMPONENTS/QUARTER/ShowQuarterData';
 
 
 import './App.css';

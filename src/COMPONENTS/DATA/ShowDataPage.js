@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Talep from './context';
+import Talep from '../context';
 import axios from 'axios';
 import Sum from './Sum';
 //import { isThisQuarter } from 'date-fns';

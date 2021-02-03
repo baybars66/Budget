@@ -129,7 +129,7 @@ export class Arz extends Component {
 
         AktifKul : "NoConn",
 
-        LoginKon : false,
+        LoginKon : true,
 
         MainKon : false,
 
@@ -141,7 +141,7 @@ export class Arz extends Component {
 
         ShowDataKon: false,
 
-        ShowQuarterKon: true,
+        ShowQuarterKon: false,
 
         basla : async () =>{
             console.log("baslıyooor");

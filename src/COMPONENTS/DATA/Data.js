@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import DatePicker, { registerLocale }  from "react-datepicker";
 import axios from 'axios';
-import Talep from './context';
+import Talep from '../context';
 
 import tr from "date-fns/locale/tr"; // the locale you want
 import "react-datepicker/dist/react-datepicker.css";
  
-import '../CSS/Anahtar.css';
+import './Anahtar.css';
 
 registerLocale("tr", tr); // register it with the name you want
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Talep from './context';
+import Talep from '../context';
 import AddUser from './AddUser';
 import AddDesc from './AddDesc';
 import AddCat from './AddCat';
@@ -17,6 +17,7 @@ import AddCountry from './AddCountry';
         AddCounKon:false,
     
     }
+    
 
 
 Getir = (dispatch, e) =>{
