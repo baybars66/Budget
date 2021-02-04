@@ -135,17 +135,17 @@ export class Arz extends Component {
 
         DataKon: false,
 
-        PanelKon: false,
+        PanelKon: true,
 
         ConfigKon: false,
 
         ShowDataKon: false,
 
-        ShowQuarterKon: true,
+        ShowQuarterKon: false,
 
         basla : async () =>{
             console.log("baslıyooor");
-            const Init = await axios.get("http://localhost:10066/Basla");
+            const Init = await axios.get("http://88.250.131.163:10066/Basla");
        
                  this.setState({
                     kisiler : Init.data.kisiler,

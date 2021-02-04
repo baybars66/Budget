@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Talep from './context';
-
+import axios from 'axios';
 
 
 class Anapanel extends Component {
@@ -31,10 +31,19 @@ class Anapanel extends Component {
     ToQuarter = async (dispatch, e) =>{
         e.preventDefault();
         dispatch({type:"QuarterPageOpen", payload:true});
-      
-        
-
+    
     }  
+      
+    General = async () =>{
+
+        const general = await axios.get("http://88.250.131.163:10066/General");
+        console.log("AnaPanel General", general.data);
+
+    } 
+
+componentDidMount=() =>{
+    this.General();
+}
 
     render() {
 

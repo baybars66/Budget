@@ -1,6 +1,5 @@
     import React, { Component } from 'react'
-   // import Talep from './context';
-    import axios from 'axios';
+
 
 
     class ShowQuaDataDetail extends Component {

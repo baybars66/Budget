@@ -80,7 +80,7 @@ Ekle = async (AktifKul, e)=> {
     const {ulke, kullanici, donus, icerik, kategory, adet, fiyat} = this.state.bilgi;
     if ((kullanici ==="" || donus ==="" ||  ulke ==="" ||  icerik ==="" ||  kategory ==="" ||  adet ==="" ||  fiyat ==="") ) console.log("boş");     
         else
-         await axios.post('http://localhost:10066/AddData/', this.state.bilgi)
+         await axios.post('http://88.250.131.163:10066/AddData/', this.state.bilgi)
          .then ( (response)=>{
             console.log(response);
             if (response.status ===200)

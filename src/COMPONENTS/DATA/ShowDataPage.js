@@ -107,7 +107,7 @@ SumOpen= async ()=>{
 
     }
    // console.log(bilgi);
-   const SumReq =await axios.post('http://localhost:10066/DetailSum/', bilgi);
+   const SumReq =await axios.post('http://88.250.131.163:10066/DetailSum/', bilgi);
     //const v2 =RealSum.data[0].Sum;
  // console.log(SumReq.data);
   
@@ -135,7 +135,7 @@ Sil = async (e)=>{
             ulke: ulke
         };
       // console.log(silinecek);
-        await axios.post('http://localhost:10066/Data/sil/', silinecek)
+        await axios.post('http://88.250.131.163:10066/Data/sil/', silinecek)
         .then ( (response)=>{
              console.log(response.data);
              this.Goster();

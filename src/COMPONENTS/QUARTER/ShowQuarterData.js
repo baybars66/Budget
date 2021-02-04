@@ -120,7 +120,7 @@ TumFonk= async(e)=>{
         peri: this.state.peri,
     };
 
-    await axios.post("http://localhost:10066/QL/", ne)
+    await axios.post("http://88.250.131.163:10066/QL/", ne)
         .then((geldi)=>{
         //console.log(response.data);
         veri=geldi.data;
@@ -137,7 +137,7 @@ TumFonk= async(e)=>{
 
     console.log(wht.peri);
 
-    await axios.post("http://localhost:10066/QT/", wht)
+    await axios.post("http://88.250.131.163:10066/QT/", wht)
     .then((response)=>{
         console.log(response.data);
         geldi=response.data;
@@ -147,7 +147,7 @@ TumFonk= async(e)=>{
    
 
     //console.log("Quarterdatdetail açıldı");
-    await axios.post("http://localhost:10066/QDETLIST/", ne)
+    await axios.post("http://88.250.131.163:10066/QDETLIST/", ne)
     .then((cevap)=>{
     //console.log(response.data);
  
