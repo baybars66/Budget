@@ -9,121 +9,184 @@ class ShowQuarterData extends Component {
 
         AnahtarKonum:"YES",
         Other:"",
-        Liste:[{}],
+        Liste:[{cat: "",gelen:1}],
         EST:"",
         REAL:"",
         peri:"Q1",
+        Paket:[],
         
 
     }
 
 
  componentDidMount=()=>{
-
- this.QL();
+ console.log("Qua didmount");
+ //this.QL();
  }
 
-Anahtar = async ()=>{
-    const {AnahtarKonum} = this.state;
- if(AnahtarKonum==="YES") await this.setState({
-     AnahtarKonum: "NO"
+    Anahtar = async ()=>{
+     const {AnahtarKonum} = this.state;
+        if(AnahtarKonum==="YES") await this.setState({
+         AnahtarKonum: "NO"
     
- });
-  else await this.setState({
-    AnahtarKonum: "YES"
-});
+        });
+         else await this.setState({
+        AnahtarKonum: "YES"
+        });
 
-this.QL();
+    //this.QL();
+    this.TumFonk();
 
 }
 
 Butt = async (e)  =>{
-    console.log(e.target.value);
+    //console.log(e.target.value);
  await this.setState({
  peri: e.target.value 
 
  });
 
-await this.Totals();
-this.QL();
+//await this.Totals();
+//this.QL();
 
+this.TumFonk();
 }
 
-Totals = async() =>{
-    var wht = {
+// Totals = async() =>{
+//     var wht = {
         
-        peri: this.state.peri,
+//         peri: this.state.peri,
 
-    }
-    console.log(wht.peri);
-    await axios.post("http://localhost:10066/QT/", wht)
-    .then((response)=>{
-console.log(response.data);
-this.setState({
+//     }
+//     console.log(wht.peri);
+//     await axios.post("http://localhost:10066/QT/", wht)
+//     .then((response)=>{
+//     console.log(response.data);
 
-    EST: response.data.est,
-    REAL: response.data.real,
+//     this.setState({
 
-   });
+//     EST: response.data.est,
+//     REAL: response.data.real,
+//    });
+//     })
+// }
+
+// QL= async (e)  =>{
+//     //console.log(this.state.AnahtarKonum);
+//     var Toplam =0;
+//     var veri=[];
+//     const ne = {
+
+//         peri : this.state.peri,
+//         Est: this.state.AnahtarKonum,
+//     }
+//     //console.log(ne);
+
+//     await axios.post("http://localhost:10066/QL/", ne)
+//         .then((response)=>{
+//         //console.log(response.data);
+//         veri=response.data;
+//         veri.map((tilki)=>{ 
+//         Toplam = Toplam + tilki.gelen;
+//         var key= tilki.gelen;
+//         //return true;/// illa koy diyo bana yoksa sarı hata veriyo
+//         return (key);
+//         })
+
+//    }
  
-    })
- 
+// );
+// this.setState({
+   
+//     Liste: veri,
+//     Toplam:Toplam,
 
-}
+//    });
+// }
 
 
-QL= async (e)  =>{
-    //console.log(this.state.AnahtarKonum);
+
+TumFonk= async(e)=>{
+    var Toplam =0;
+    var veri=[];
+    var geldi=[];
+    var Paket=[];
     const ne = {
-
         peri : this.state.peri,
         Est: this.state.AnahtarKonum,
-    }
-    //console.log(ne);
+    };
+
+    var wht = {
+        peri: this.state.peri,
+    };
 
     await axios.post("http://localhost:10066/QL/", ne)
-        .then((response)=>{
+        .then((geldi)=>{
         //console.log(response.data);
-        var Toplam =0;
-        response.data.map(bilgi=>{ 
-        Toplam = Toplam + bilgi.gelen;
-        return true;/// illa koy diyo bana yoksa sarı hata veriyo
-     
+        veri=geldi.data;
+        veri.map((tilki)=>{ 
+        Toplam = Toplam + tilki.gelen;
+        var key= tilki.gelen;
+        //return true;/// illa koy diyo bana yoksa sarı hata veriyo
+        return (key);
         })
-    this.setState({
+
+        }
+ 
+    );
+
+    console.log(wht.peri);
+
+    await axios.post("http://localhost:10066/QT/", wht)
+    .then((response)=>{
+        console.log(response.data);
+        geldi=response.data;
+
+    });
+
    
-        Liste: response.data,
+
+    //console.log("Quarterdatdetail açıldı");
+    await axios.post("http://localhost:10066/QDETLIST/", ne)
+    .then((cevap)=>{
+    //console.log(response.data);
+ 
+        Paket= cevap.data;
+
+ 
+    });
+
+
+    this.setState({
+
+        EST: geldi.est,
+        REAL: geldi.real,
+        Liste: veri,
         Toplam:Toplam,
-  
-       });
+        Paket:Paket,
+
+    });
 
 
 
-//  console.log("Liste buu ", this.state.Liste);
-
-//  console.log("Toplam buu ", this.state.Toplam);
-
-   }
- 
-);
 
 
-
-    
- 
 
 }
-
 
 
     render() {
  
-        const {Liste, Toplam} = this.state;
+        console.log("Qua baslık renderdayım");
+        const {Liste, Toplam, Paket} = this.state;
         const bilgi= {
             EstKon: this.state.AnahtarKonum,
             Peri: this.state.peri,
 
         }
+        //console.log("Liste ", Liste);
+        //console.log("Paket", Paket);
+        //console.log("bilgi= ", bilgi);
         return(
             <Talep>
                 {
@@ -193,14 +256,17 @@ QL= async (e)  =>{
 
                 <div className="form-group col-5 border border-dark">
                     <div className="form-row ">
-                    <div className="form-group-right col-6 border"> 
+                    <div className="form-group-right col-6"> 
                     
                 {
-                    Liste.map (bilgi=>{
-                        return(
-                          <div className="text-right">
-                          <span className="badge badge-secondary text-wrap" >{bilgi.cat}</span>
+                    Liste.map((yoyo)=>{
+                      
+                        return(<div key={yoyo.cat}>
+                          <div className="text-right" >
+                          <span className="badge badge-secondary text-wrap" key={yoyo.cat}>{yoyo.cat}</span>
                           </div>
+                       </div>
+
                         )
 
                     })
@@ -209,36 +275,46 @@ QL= async (e)  =>{
 
                 </div>
 
-                <div className="form-group col-2 border"> 
-                {
-     
-                   Liste.map (bilgi=>{
-                        return(
-                         <div className="text-right">
-                         <span className="badge badge-secondary text-wrap" >{bilgi.gelen}</span>
-                         </div>
-         
-                        )
 
-                    })
-                }
-                
-                </div>
+<div className="form-group col-2 border"> 
+{
 
-                <div className="form-group-left  col-3 "> 
+   Liste.map ((veri)=>{
+   
+        return(
+         <div className="text-right"  >
+         <span className="badge badge-secondary text-wrap" key ={veri.gelen}>{veri.gelen}</span>
+         </div>
 
-                {
-     
-                 Liste.map (bilgi=>{
-                     return(
-                     <div className="text-left">
-                     <span className="badge badge-primary text-wrap" >% {Math.round(bilgi.gelen/Toplam*100)}</span>
-                     </div>
-                     )   
-                  })
-                }
-                
-                </div>
+        )
+
+    })
+}
+
+</div>
+
+
+<div className="form-group-left  col-3 "> 
+
+{
+
+ Liste.map ((dede)=>{
+    
+     return(
+     <div className="text-left" >
+     <span className="badge badge-primary text-wrap" key ={dede.cat} >% {Math.round(dede.gelen/Toplam*100)}</span>
+     </div>
+     )   
+  })
+}
+
+</div>
+
+
+
+
+
+
 
                 </div>
                 </div>  
@@ -246,7 +322,15 @@ QL= async (e)  =>{
 
                  </form>
 
-                 <ShowQuaDataDetail bilgi={bilgi}/>
+
+<div>
+          
+<ShowQuaDataDetail bilgi={bilgi} Paket={Paket}/>
+
+          </div>
+
+
+              
                  </div>
                 
 
@@ -262,5 +346,63 @@ QL= async (e)  =>{
 
 
 export default ShowQuarterData;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//<ShowQuaDataDetail bilgi={bilgi}/>
+
+
+
+// <table className="table table-striped">
+// <thead>
+// <tr>
+//     <th scope= "col">Description</th>
+//     <th scope= "col">Category</th>
+//     <th scope= "col">Quantity</th>
+   
+//     <th scope= "col">Amount</th>
+   
+
+// </tr>
+
+// </thead>
+// <tbody>
+
+
+
+//  {  
+ 
+//      Paket.map( (bilgi) =>{
+//       return( <tr key= {bilgi.Descrip}>
+        
+//        <th scope="row">{bilgi.Descrip}</th> 
+      
+          
+//            <td> {bilgi.Category} </td> 
+//            <td> {bilgi.Quan} </td> 
+//            <td> {bilgi.Sum}</td> 
+         
+//            </tr>
+//              )
+             
+//      })
+//    }
+
+
+
+// </tbody>
+// </table>
 
 
