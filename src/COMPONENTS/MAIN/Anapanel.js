@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import Talep from './context';
-import axios from 'axios';
+import Talep from '../context';
+import General from './General';
+
 
 
 class Anapanel extends Component {
 
     state = {
         deneme: false,
+        bilgi:"",
        
     }
 
@@ -34,19 +36,14 @@ class Anapanel extends Component {
     
     }  
       
-    General = async () =>{
 
-        const general = await axios.get("http://88.250.131.163:10066/General");
-        console.log("AnaPanel General", general.data);
 
-    } 
-
-componentDidMount=() =>{
-    this.General();
-}
-
+// componentDidUpdate=()=>{
+//     this.General();
+// }
     render() {
-
+  const {bilgi}=this.state;
+  console.log("Anapanelde ", bilgi)
         return(
             <Talep>
                 {
@@ -56,7 +53,7 @@ componentDidMount=() =>{
                  return (
                     <div className={PanelKon ? "d-block" : "d-none"}>
                     <div className="container-fluid p-1 my-3 bg-dark text-white">
-                    <h4 className="text-center">MAIN PANEL</h4>
+                    <h4 className="text-center" >MAIN PANEL</h4>
 
                     <div className="container-fluid">
                     <div className="jumbotron">
@@ -97,7 +94,8 @@ componentDidMount=() =>{
                     </div>
                     </div>
                     </div>
-
+                  <General />
+                
                     </div>
 
                     )
