@@ -40,14 +40,14 @@ export default class Example extends PureComponent {
     //const data02=this.props.data.RealSum;
 
     return (
-      <PieChart width={400} height={400}>
+      <PieChart width={600} height={600}>
         <Pie
           data={lll}
-          cx={200}
-          cy={200}
+          cx={100}
+          cy={100}
           labelLine={false}
           label={renderCustomizedLabel}
-          outerRadius={120}
+          outerRadius={80}
           fill="#8884d8"
           dataKey="value"
           

@@ -32,15 +32,15 @@ componentDidMount=()=>{
       const {RealSum} =this.state;
  
         return (
-            <div className="container">
+            <div className="container-xl border">
                       
             <div className="row ">
-            <div className="col-4">
+            <div className="col-3 border">
             <table className="table table-sm table-striped">
             <thead>
             <tr>
-                <th className= "bg-danger" scope= "col">QUARTERS</th>
-                <th className= "bg-danger" scope= "col">ESTIMATION</th>
+                <th className= "bg-danger" scope= "col">QUA</th>
+                <th className= "bg-danger" scope= "col">ESTI</th>
             </tr>
             
             </thead>
@@ -60,15 +60,15 @@ componentDidMount=()=>{
            </tbody>
            </table>
            </div>
-           <div className="col-4">
+           <div className="col-3 border">
            <Gra2 data={EstSum}/>
            </div>
 
-           <div className="col-4">
+           <div className="col-3">
             <table className="table table-sm table-striped">
             <thead>
             <tr>
-                <th className= "bg-primary" scope= "col" text ="white">QUARTERS</th>
+                <th className= "bg-primary" scope= "col" text ="white">QUA</th>
                 <th className= "bg-primary" scope= "col">REAL</th>
             </tr>
             
@@ -89,7 +89,7 @@ componentDidMount=()=>{
            </tbody>
            </table>
            </div>
-           <div className="col-4">
+           <div className="col-3">
            <Gra2 data={RealSum}/>
            </div>
 

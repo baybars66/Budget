@@ -129,13 +129,13 @@ export class Arz extends Component {
 
         AktifKul : "NoConn",
 
-        LoginKon : false,
+        LoginKon : true,
 
         MainKon : false,
 
         DataKon: false,
 
-        PanelKon: true,
+        PanelKon: false,
 
         ConfigKon: false,
 
@@ -143,6 +143,7 @@ export class Arz extends Component {
 
         ShowQuarterKon: false,
 
+        
         basla : async () =>{
             console.log("baslıyooor");
             const Init = await axios.get("http://88.250.131.163:10066/Basla");
