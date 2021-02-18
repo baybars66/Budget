@@ -32,10 +32,10 @@ componentDidMount=()=>{
       const {RealSum} =this.state;
  
         return (
-            <div className="container-xl border">
+            <div className="container">
                       
             <div className="row ">
-            <div className="col-3 border">
+            <div className="col-3 ">
             <table className="table table-sm table-striped">
             <thead>
             <tr>
@@ -60,7 +60,7 @@ componentDidMount=()=>{
            </tbody>
            </table>
            </div>
-           <div className="col-3 border">
+           <div className="col-3">
            <Gra2 data={EstSum}/>
            </div>
 
